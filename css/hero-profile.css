@@ -1,0 +1,79 @@
+/* ============================================================
+   Home hero: profile card on the right, copy on the left
+   ============================================================ */
+.hero-profile {
+  position: absolute;
+  top: 55%;
+  right: clamp(26px, 4vw, 64px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  width: min(400px, 32vw);
+  height: clamp(540px, 62vh, 620px);
+  transform: translateY(-35%);
+}
+
+.hero-profile .lanyard {
+  width: 100%;
+  height: 100%;
+}
+
+/* The card carries the intro on desktop and tablet. */
+.hero-intro {
+  display: none;
+}
+
+/* Keep the CTA on the left, opposite the card. */
+.hero-cta {
+  left: 56px;
+  right: auto;
+}
+
+@media (max-width: 1180px) {
+  .hero-profile {
+    right: 28px;
+    width: min(300px, 30vw);
+  }
+
+  .hero-cta {
+    left: 36px;
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-profile {
+    right: 22px;
+    width: min(270px, 34vw);
+    height: 470px;
+  }
+
+  .hero-cta {
+    left: 24px;
+    bottom: 48px;
+    max-width: 210px;
+  }
+
+  .hero-intro {
+    left: 24px;
+    bottom: 48px;
+  }
+}
+
+/* On phones the 3D card would crowd the hero; show the original intro instead. */
+@media (max-width: 760px) {
+  .hero-profile {
+    display: none;
+  }
+
+  .hero-intro {
+    display: block;
+    left: 22px;
+    bottom: 42px;
+    max-width: min(280px, calc(100vw - 44px));
+  }
+
+  .hero-cta {
+    display: none;
+  }
+}

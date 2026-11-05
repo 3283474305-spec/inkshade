@@ -1,0 +1,59 @@
+/* ============================================================
+   Unicorn Studio hero background
+   ============================================================ */
+.hero-lithos {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 38%, rgba(140, 54, 20, 0.38), transparent 65%),
+    #030303;
+}
+
+.hero-unicorn {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 52% 38%, #3d1a0a 0%, #100705 48%, #030303 100%);
+}
+
+/* The SDK renders a wrapper plus a canvas with inline sizing. */
+.hero-unicorn > div,
+.hero-unicorn > div > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-unicorn canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-unicorn-placeholder {
+  background:
+    radial-gradient(ellipse 70% 55% at 52% 38%, rgba(214, 92, 36, 0.34), transparent 70%),
+    #050403;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.1) 46%, rgba(0, 0, 0, 0.66) 100%),
+    radial-gradient(ellipse at 50% 44%, transparent 32%, rgba(0, 0, 0, 0.46) 100%);
+}
+
+/* If WebGL or the project fails, the fallback gradient remains readable. */
+.unicorn-failed .hero-unicorn {
+  opacity: 0;
+}
+
+@media (max-width: 760px) {
+  .hero-scrim {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.16) 48%, rgba(0, 0, 0, 0.72) 100%),
+      radial-gradient(ellipse at 50% 44%, transparent 26%, rgba(0, 0, 0, 0.5) 100%);
+  }
+}

@@ -1,0 +1,330 @@
+/* ============================================================
+   Liquid glass system
+   Adapted from Mineradio's SVG-refraction control glass:
+   - per-surface displacement map (real refraction, not just blur)
+   - thin specular rim + chromatic warmth
+   - pointer-follow sheen
+   - hover lift / press squash / click pulse
+   ============================================================ */
+
+:root {
+  --lg-tint: rgba(12, 12, 15, 0.33);
+  --lg-border: rgba(255, 255, 255, 0.15);
+  --lg-border-strong: rgba(255, 255, 255, 0.26);
+  --lg-shadow:
+    0 28px 68px -28px rgba(0, 0, 0, 0.72),
+    0 8px 24px -16px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -20px 44px rgba(0, 0, 0, 0.18);
+  --lg-rim:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.lg-surface {
+  --lg-x: 50%;
+  --lg-y: 0%;
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--lg-border) !important;
+  background-color: var(--lg-tint) !important;
+  background-image:
+    radial-gradient(
+      120% 160% at var(--lg-x) var(--lg-y),
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.04) 30%,
+      transparent 62%
+    ),
+    linear-gradient(
+      132deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.012) 38%,
+      rgba(0, 0, 0, 0.16) 100%
+    ) !important;
+  box-shadow: var(--lg-shadow);
+  backdrop-filter: blur(24px) saturate(1.35) brightness(1.06);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35) brightness(1.06);
+  transition:
+    border-color 0.32s ease,
+    box-shadow 0.38s ease,
+    background-color 0.32s ease,
+    transform 0.32s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.lg-surface:hover {
+  border-color: var(--lg-border-strong) !important;
+}
+
+.lg-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: var(--lg-rim);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.lg-rim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      90% 120% at var(--lg-x) var(--lg-y),
+      rgba(255, 255, 255, 0.1),
+      transparent 52%
+    );
+  opacity: 0.75;
+}
+
+/* ---------- Specific surfaces ---------- */
+.bar.lg-surface {
+  border-width: 0 0 1px !important;
+  border-radius: 0 !important;
+  border-color: rgba(255, 255, 255, 0.075) !important;
+  background-color: rgba(6, 6, 8, 0.3) !important;
+  box-shadow:
+    0 18px 50px -30px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.bar.lg-surface.scrolled {
+  background-color: rgba(6, 6, 8, 0.94) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 18px 50px -26px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.music-search.lg-surface {
+  border-radius: 999px !important;
+  background-color: rgba(10, 10, 12, 0.36) !important;
+  box-shadow:
+    0 18px 48px -24px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 0 22px rgba(255, 255, 255, 0.045);
+}
+
+.music-search.lg-focused {
+  transform: translateY(-2px);
+  border-color: rgba(232, 112, 42, 0.52) !important;
+  box-shadow:
+    0 24px 58px -24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(232, 112, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 0 28px rgba(232, 112, 42, 0.08);
+}
+
+.player-shell.lg-surface {
+  background-color: rgba(9, 9, 12, 0.43) !important;
+  background-image:
+    radial-gradient(
+      90% 120% at var(--lg-x) var(--lg-y),
+      rgba(255, 255, 255, 0.08),
+      transparent 58%
+    ),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(0, 0, 0, 0.12)) !important;
+  box-shadow:
+    0 40px 100px -36px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.player-shell.lg-surface::before {
+  opacity: 0.42;
+}
+
+.player-shell.lg-surface::after {
+  background:
+    radial-gradient(110% 80% at 15% 0%, rgba(255, 255, 255, 0.075), transparent 56%),
+    linear-gradient(160deg, rgba(10, 10, 12, 0.52), rgba(10, 10, 12, 0.82));
+}
+
+.mini.lg-surface {
+  background-color: rgba(15, 15, 18, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 24px 65px -20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.login-box.lg-surface {
+  background-color: rgba(13, 13, 16, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 40px 100px -30px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.work-card.lg-surface,
+.contact-card.lg-surface,
+.contact-item.lg-surface,
+.form-card.lg-surface,
+.gallery-card.lg-surface,
+.game-card.lg-surface,
+.game-promo.lg-surface,
+.mp-card.lg-surface {
+  background-color: rgba(13, 13, 16, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.13) !important;
+}
+
+.contact-item.lg-surface {
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.form-card.lg-surface {
+  background-color: rgba(13, 13, 16, 0.46) !important;
+}
+
+.work-card.lg-surface:hover,
+.contact-card.lg-surface:hover {
+  border-color: rgba(255, 255, 255, 0.26) !important;
+  box-shadow:
+    0 34px 80px -30px rgba(0, 0, 0, 0.82),
+    0 0 0 1px rgba(232, 112, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Glass buttons ---------- */
+.lg-button {
+  --lg-x: 50%;
+  --lg-y: 50%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform-origin: center;
+  will-change: transform;
+  background-image:
+    radial-gradient(
+      120% 140% at var(--lg-x) var(--lg-y),
+      rgba(255, 255, 255, 0.17),
+      transparent 55%
+    ),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.005)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 6px 18px -10px rgba(0, 0, 0, 0.45);
+}
+
+.lg-button:not(.btn-primary):not(.music-search button):not(.ctrl.play) {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
+.lg-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  z-index: 0;
+}
+
+.lg-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.lg-ripple {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 68%);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-surface,
+  .lg-button {
+    transition: none !important;
+  }
+
+  .lg-ripple {
+    display: none;
+  }
+}
+
+/* ---------- Button motion adapted from Mineradio ---------- */
+.lg-button {
+  transition:
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.26s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    color 0.2s ease !important;
+}
+
+.lg-button svg,
+.lg-button .lg-icon {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lg-button:hover {
+  transform: translateY(-2px) scale(1.055);
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 12px 26px -14px rgba(0, 0, 0, 0.65),
+    0 0 20px rgba(232, 112, 42, 0.055);
+}
+
+.lg-button:hover svg,
+.lg-button:hover .lg-icon {
+  transform: scale(1.08);
+}
+
+.lg-button:active {
+  transform: translateY(0) scale(0.93);
+  transition-duration: 0.09s !important;
+}
+
+.lg-button:active svg,
+.lg-button:active .lg-icon {
+  transform: scale(0.9);
+}
+
+.lg-button:focus-visible {
+  outline: 2px solid rgba(232, 112, 42, 0.65);
+  outline-offset: 3px;
+}
+
+.lg-rim {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 1px 0 0 rgba(255, 130, 76, 0.08),
+    inset -1px 0 0 rgba(86, 156, 255, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-button,
+  .lg-button svg,
+  .lg-button .lg-icon {
+    transition: none !important;
+  }
+
+  .lg-button:hover,
+  .lg-button:active {
+    transform: none;
+  }
+}
+
+/* Keep fixed surfaces fixed: .lg-surface sets position:relative for its rim. */
+.bar.lg-surface {
+  position: fixed;
+}
+
+.mini.lg-surface {
+  position: fixed;
+}

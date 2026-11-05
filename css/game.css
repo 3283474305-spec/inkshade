@@ -1,0 +1,358 @@
+/* ============================================================
+   奶龙翻翻乐
+   ============================================================ */
+
+.game-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 22px 24px 18px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.game-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.game-stats {
+  display: flex;
+  gap: 28px;
+}
+
+.gstat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.gstat b {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.gstat span {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.game-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+.seg button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.seg button:hover {
+  color: var(--text);
+}
+
+.seg button.active {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+#gRestart {
+  padding: 9px 14px;
+  font-size: 0.82rem;
+}
+
+#gSound {
+  font-size: 1rem;
+}
+
+/* ---------- 棋盘 ---------- */
+.game-board {
+  --cols: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: clamp(8px, 1.4vw, 14px);
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  perspective: 800px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.2), transparent 42%),
+    radial-gradient(circle at 75% 80%, rgba(255, 255, 255, 0.12), transparent 45%),
+    linear-gradient(140deg, var(--accent), var(--accent-2));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 10px 22px -12px var(--accent);
+  transition: filter 0.2s;
+}
+
+.card-back::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+.card-logo {
+  position: relative;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(0.72rem, 1.8vw, 0.95rem);
+  letter-spacing: 0.2em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card:hover:not(.flipped):not(.matched) .card-back {
+  filter: brightness(1.06);
+}
+
+.card:active:not(.flipped):not(.matched) {
+  transform: scale(0.97);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+
+.card.matched {
+  pointer-events: none;
+}
+
+.card.matched .card-front {
+  box-shadow: inset 0 0 0 3px var(--accent),
+    0 12px 26px -14px var(--accent);
+}
+
+.card.matched {
+  animation: card-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes card-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 底部提示 ---------- */
+.game-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.game-hint {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- 胜利弹层 ---------- */
+.win-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 270;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(8, 10, 20, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.win-overlay[hidden] {
+  display: none;
+}
+
+.win-confetti {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.win-card {
+  position: relative;
+  width: min(360px, 100%);
+  padding: 30px 26px 24px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: win-in 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes win-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.win-emoji {
+  font-size: 2.8rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.win-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.win-stats {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0 0 10px;
+}
+
+.win-stars {
+  font-size: 1.55rem;
+  letter-spacing: 0.22em;
+  color: #f59e0b;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 12px rgba(245, 158, 11, 0.35);
+}
+
+.win-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+  .game-shell {
+    padding: 18px 14px 14px;
+    border-radius: 18px;
+  }
+
+  .game-stats {
+    gap: 18px;
+  }
+
+  .gstat b {
+    font-size: 1.15rem;
+  }
+
+  .game-tools {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .card-face {
+    border-radius: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .game-board {
+    gap: 6px;
+  }
+
+  .seg button {
+    padding: 6px 9px;
+    font-size: 0.72rem;
+  }
+
+  #gRestart {
+    padding: 8px 10px;
+    font-size: 0.76rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition-duration: 0.01ms;
+  }
+
+  .card.matched {
+    animation: none;
+  }
+}

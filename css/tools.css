@@ -1,0 +1,365 @@
+/* ============================================================
+   Tools: Pomodoro + local to-do
+   ============================================================ */
+.tools-section {
+  padding-top: 18px;
+  padding-bottom: 40px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 26px;
+  align-items: stretch;
+}
+
+.tool-card {
+  position: relative;
+  isolation: isolate;
+  padding: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  background: rgba(12, 12, 15, 0.42);
+  box-shadow:
+    0 34px 80px -34px rgba(0, 0, 0, 0.78),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+}
+
+.tool-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.tool-head .eyebrow {
+  margin-bottom: 6px;
+}
+
+.tool-head h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.tool-badge {
+  flex: none;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pomo-modes {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pomo-modes button {
+  flex: 1;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pomo-modes button:hover {
+  color: #fff;
+}
+
+.pomo-modes button.active {
+  background: #fff;
+  color: #111;
+}
+
+.pomo-ring-wrap {
+  position: relative;
+  width: min(270px, 72%);
+  margin: 24px auto 20px;
+}
+
+.pomo-ring {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(-90deg);
+}
+
+.pomo-ring-track,
+.pomo-ring-fill {
+  fill: none;
+  stroke-width: 5;
+}
+
+.pomo-ring-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.pomo-ring-fill {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.45s linear;
+  filter: drop-shadow(0 0 8px rgba(232, 112, 42, 0.35));
+}
+
+.pomo-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pomo-readout strong {
+  font-family: var(--font-sans);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pomo-readout span {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pomo-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pomo-actions .btn {
+  min-width: 110px;
+}
+
+.tool-foot {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* Todo */
+.todo-form {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.todo-form input:focus {
+  border-color: rgba(232, 112, 42, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.todo-form input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.todo-form .btn {
+  padding: 0 18px;
+  border-radius: 12px;
+}
+
+.todo-filters {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0 10px;
+}
+
+.todo-filters button {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.todo-filters button:hover {
+  color: #fff;
+}
+
+.todo-filters button.active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 330px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.035);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.todo-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.todo-check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 50%;
+  background: transparent;
+  color: #111;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.todo-item.done .todo-check {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12.5px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.todo-item.done .todo-text {
+  color: rgba(255, 255, 255, 0.34);
+  text-decoration: line-through;
+}
+
+.todo-delete {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.todo-delete:hover {
+  color: #ff8f7a;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.todo-empty {
+  padding: 22px 8px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+}
+
+.todo-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.todo-clear {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.todo-clear:hover {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 22px;
+  }
+
+  .pomo-ring-wrap {
+    width: min(240px, 80%);
+  }
+}

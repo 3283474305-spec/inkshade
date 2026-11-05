@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jinghang Zhang — personal site, interfaces and small tools. BIUH, Hainan.">
+  <title>Jinghang Zhang — Layers of code &amp; craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap"></noscript>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/player.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/lithos.css">
+  <link rel="stylesheet" href="css/particle-text.css">
+  <link rel="stylesheet" href="css/flex-carousel.css">
+  <link rel="stylesheet" href="css/liquid-ether.css">
+  <link rel="stylesheet" href="css/music-islands.css">
+  <link rel="stylesheet" href="css/liquid-glass.css">
+  <link rel="stylesheet" href="css/music-float.css">
+  <link rel="stylesheet" href="css/tools.css">
+  <link rel="stylesheet" href="css/unicorn-bg.css">
+  <link rel="stylesheet" href="css/lanyard.css">
+  <link rel="stylesheet" href="css/hero-profile.css">
+  <noscript><style>.reveal { opacity: 1; transform: none; } .view { display: block !important; }</style></noscript>
+</head>
+<body data-page="home">
+
+  <header class="bar" id="nav">
+    <a class="brand" href="#home" aria-label="Ricardo.M,Lu">
+      <svg width="26" height="26" viewBox="0 0 256 256" fill="#ffffff" aria-hidden="true">
+        <path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z" />
+      </svg>
+      <span class="brand-text">Ricardo.M,Lu</span>
+    </a>
+
+    <nav class="bar-nav nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#portfolio" data-page="portfolio">Work</a>
+      <a href="#music" data-page="music">Music</a>
+      <a href="#game" data-page="game">Play</a>
+      <a href="#tools" data-page="tools">Tools</a>
+      <a href="#contact" data-page="contact">Contact</a>
+    </nav>
+
+    <div class="bar-tools">
+      <a class="nav-cta" href="#contact">Let's talk</a>
+      <button type="button" class="bar-btn nav-toggle" id="navToggle" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="app">
+<section class="view active" data-view="home" id="view-home">
+<section class="hero-lithos" id="hero">
+      <div class="hero-unicorn" id="unicorn-bg-root" aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-profile" id="lanyard-root"></div>
+
+      <div class="hero-heading">
+        <h1 class="sr-only">Layers of code &amp; craft</h1>
+        <div id="particle-root" class="hero-particle-root" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-intro">
+        <p>
+          I'm Jinghang Zhang, a student at Hainan Bielefeld University of Applied Sciences (BIUH).
+          I like turning ideas into pages you can click, feel, and explore — and polishing the space
+          between code, layout, and motion.
+        </p>
+      </div>
+
+      <div class="hero-cta">
+        <p>
+          Every project is built in layers: structure, motion, and the quiet gaps between them.
+          <span class="hero-hint">Move the cursor to reveal what is underneath.</span>
+        </p>
+        <a class="hero-btn" href="#portfolio">Explore work</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <span class="eyebrow">01 — About</span>
+            <h2 class="section-title">Built with care</h2>
+            <p>
+              I'm Jinghang Zhang, studying at Hainan Bielefeld University of Applied Sciences (BIUH).
+              I spend my time on the web, interaction, and visual design, turning classroom ideas into
+              pages that people can click and experience.
+            </p>
+            <p>
+              This site is my practice ground: a record of projects, photographs, music, and things I am
+              still learning. If you care about design or front-end work, write me a note.
+            </p>
+            <div class="tag-row" style="margin-top: 22px;">
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">BIUH</span>
+              <span class="tag">Interaction</span>
+              <span class="tag">Motion</span>
+            </div>
+          </div>
+
+          <div class="reveal" data-delay="2">
+            <div class="skill-list">
+              <div class="skill">
+                <div class="skill-top"><span>HTML / CSS</span><span>80%</span></div>
+                <div class="skill-bar"><i data-level="80"></i></div>
+              </div>
+              <div class="skill">
+                <div class="skill-top"><span>JavaScript</span><span>70%</span></div>
+                <div class="skill-bar"><i data-level="70"></i></div>
+              </div>
+              <div class="skill">
+                <div class="skill-top"><span>UI design</span><span>75%</span></div>
+                <div class="skill-bar"><i data-level="75"></i></div>
+              </div>
+              <div class="skill">
+                <div class="skill-top"><span>Motion</span><span>65%</span></div>
+                <div class="skill-bar"><i data-level="65"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 0;">
+      <div class="container">
+        <div class="music-promo reveal">
+          <div class="mp-covers" aria-hidden="true"><img src="images/demo-first-light.jpg" alt=""></div>
+          <div class="mp-text">
+            <span class="eyebrow">02 — Music</span>
+            <h3>A place to listen</h3>
+            <p>Three original demo tracks, a floating player, and scrolling lyrics. The full NetEase search and playlist experience lives in the local build.</p>
+          </div>
+          <div class="mp-actions">
+            <button class="btn btn-primary" id="mpPlay">Listen now</button>
+            <a class="btn btn-ghost" href="#music">Open player →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 0;">
+      <div class="container">
+        <div class="game-promo reveal">
+          <div class="gp-faces" aria-hidden="true">
+            <img src="images/nailong/nailong-01.jpg" alt="">
+            <img src="images/nailong/nailong-05.jpg" alt="">
+            <img src="images/nailong/nailong-09.jpg" alt="">
+          </div>
+          <div class="gp-text">
+            <span class="eyebrow">03 — Play</span>
+            <h3>Nailong memory</h3>
+            <p>A small memory game built from abstract Nailong stickers. Three difficulties, a timer, and a best score.</p>
+          </div>
+          <div class="mp-actions">
+            <a class="btn btn-primary" href="#game">Play a round</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none;gap:20px;flex-wrap:wrap;">
+          <div>
+            <span class="eyebrow">04 — Selected work</span>
+            <h2 class="section-title">Recent projects</h2>
+            <p class="section-desc">A few interfaces and experiments. The full archive lives on the Work page.</p>
+          </div>
+          <a class="btn btn-ghost" href="#portfolio">View all work →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="work-card reveal" data-delay="1" href="#portfolio">
+            <div class="work-thumb">
+              <img src="images/photo-1.jpg" alt="Personal portfolio website">
+              <span class="badge">Web</span>
+              <span class="overlay">View project →</span>
+            </div>
+            <div class="work-body">
+              <h3>Personal portfolio</h3>
+              <p>A responsive multi-page site with theme switching and scroll motion.</p>
+              <div class="tag-row"><span class="tag">HTML/CSS</span><span class="tag">JS</span></div>
+            </div>
+          </a>
+
+          <a class="work-card reveal" data-delay="2" href="#portfolio">
+            <div class="work-thumb">
+              <img src="images/photo-3.jpg" alt="Data visualization dashboard">
+              <span class="badge">Web</span>
+              <span class="overlay">View project →</span>
+            </div>
+            <div class="work-body">
+              <h3>Data dashboard</h3>
+              <p>Turning dry tables into charts that make sense at a glance.</p>
+              <div class="tag-row"><span class="tag">Charts</span><span class="tag">Interaction</span></div>
+            </div>
+          </a>
+
+          <a class="work-card reveal" data-delay="3" href="#tools">
+            <div class="work-thumb">
+              <img src="images/photo-5.jpg" alt="Focus tools">
+              <span class="badge">Tools</span>
+              <span class="overlay">Open tools →</span>
+            </div>
+            <div class="work-body">
+              <h3>Focus &amp; to-do</h3>
+              <p>A Pomodoro timer and a local to-do list, both ready to use.</p>
+              <div class="tag-row"><span class="tag">JS</span><span class="tag">LocalStorage</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+</section>
+<section class="view" data-view="portfolio" id="view-portfolio">
+<div class="page-head container">
+      <span class="eyebrow">02 — Work</span>
+      <h1>Selected <span class="grad-text">work</span></h1>
+      <p>Interfaces, visual experiments, and small tools. Click a card for the story behind it, or filter by type.</p>
+    </div>
+
+    <section style="padding-top: 20px;">
+      <div class="container">
+        <div class="filter-row" role="group" aria-label="Filter work">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="design">Design</button>
+          <button class="filter-btn" data-filter="tool">Tools</button>
+        </div>
+
+        <div class="card-grid" id="workGrid">
+          <article class="work-card reveal" tabindex="0" data-cat="web" data-project='{"title":"Personal portfolio","desc":"A multi-page personal site built from scratch: shared styles and scripts, theme switching, scroll-in motion, responsive layout, plus the work filter and detail modal you are using now.","tags":["HTML/CSS","JavaScript","Responsive"],"img":"images/photo-1.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-1.jpg" alt="Personal portfolio website">
+              <span class="badge">Web</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Personal portfolio</h3>
+              <p>A responsive multi-page site with theme switching and scroll motion.</p>
+              <div class="tag-row"><span class="tag">HTML/CSS</span><span class="tag">JS</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="1" tabindex="0" data-cat="web" data-project='{"title":"Data visualization dashboard","desc":"Turning numbers in a table into clear charts and cards. Filters, hover details, and animated counters make reading data feel less like work.","tags":["Charts","Interaction","Data"],"img":"images/photo-3.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-3.jpg" alt="Data visualization dashboard">
+              <span class="badge">Web</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Data dashboard</h3>
+              <p>Turning dry tables into charts that make sense at a glance.</p>
+              <div class="tag-row"><span class="tag">Charts</span><span class="tag">Interaction</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="2" tabindex="0" data-cat="design" data-project='{"title":"Brand visual refresh","desc":"A visual refresh for a small studio: color, type hierarchy, logo usage, and social templates, keeping the brand consistent across very different surfaces.","tags":["Brand","Visual","Color"],"img":"images/photo-2.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-2.jpg" alt="Brand visual refresh">
+              <span class="badge">Design</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Brand visual refresh</h3>
+              <p>A consistent color and type system that makes the brand recognizable.</p>
+              <div class="tag-row"><span class="tag">Brand</span><span class="tag">Visual</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" tabindex="0" data-cat="tool" data-project='{"title":"Pomodoro timer","desc":"A minimal Pomodoro timer: 25 minutes of focus, a 5 minute break, automatic rounds, and local storage. No sign-up, no ads. Open the Tools page to use it.","tags":["JavaScript","LocalStorage","Tool"],"img":"images/photo-5.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-5.jpg" alt="Pomodoro timer">
+              <span class="badge">Tools</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Pomodoro timer</h3>
+              <p>A quiet timer that helps you stay with one thing for 25 minutes.</p>
+              <div class="tag-row"><span class="tag">JS</span><span class="tag">LocalStorage</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="1" tabindex="0" data-cat="design" data-project='{"title":"Music player interface","desc":"A conceptual music player UI: large cover, blurred backdrop, scrolling lyrics, and gesture controls. The point was the atmosphere around listening.","tags":["UI design","Motion","Concept"],"img":"images/photo-7.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-7.jpg" alt="Music player interface">
+              <span class="badge">Design</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Music player interface</h3>
+              <p>Large cover art and a blurred backdrop, built around atmosphere.</p>
+              <div class="tag-row"><span class="tag">UI</span><span class="tag">Motion</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="2" tabindex="0" data-cat="tool" data-project='{"title":"To-do list","desc":"A local to-do list with add, complete, delete, and browser storage. Keyboard support, empty states, and a small completion motion make it feel finished.","tags":["JavaScript","Interaction","CRUD"],"img":"images/photo-6.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-6.jpg" alt="To-do list app">
+              <span class="badge">Tools</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>To-do list</h3>
+              <p>Add, complete, delete, and keep tasks in your browser.</p>
+              <div class="tag-row"><span class="tag">JS</span><span class="tag">Interaction</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" tabindex="0" data-cat="web" data-project='{"title":"Landing page motion","desc":"Scroll-triggered parallax, fade-ins, and number count-ups paired with restrained typography, giving an ordinary product page a sense of rhythm.","tags":["Motion","Scroll","Landing"],"img":"images/photo-4.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-4.jpg" alt="Landing page motion">
+              <span class="badge">Web</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Landing page motion</h3>
+              <p>Parallax and fade-ins that give a page a sense of rhythm.</p>
+              <div class="tag-row"><span class="tag">Motion</span><span class="tag">Scroll</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="1" tabindex="0" data-cat="design" data-project='{"title":"Poster series","desc":"A set of posters about the city at night, using gradients and simple geometry to capture the mood of different cities after dark.","tags":["Illustration","Poster","Gradient"],"img":"images/photo-8.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-8.jpg" alt="Poster series">
+              <span class="badge">Design</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Poster series</h3>
+              <p>Gradient posters about the city after dark.</p>
+              <div class="tag-row"><span class="tag">Illustration</span><span class="tag">Poster</span></div>
+            </div>
+          </article>
+
+          <article class="work-card reveal" data-delay="2" tabindex="0" data-cat="tool" data-project='{"title":"Expense notebook","desc":"A small tool for daily spending: categories, monthly totals, and export. The interface stays out of the way so keeping track does not feel like extra work.","tags":["JavaScript","Data","Tool"],"img":"images/photo-9.jpg"}'>
+            <div class="work-thumb">
+              <img src="images/photo-9.jpg" alt="Expense notebook">
+              <span class="badge">Tools</span>
+              <span class="overlay">View details →</span>
+            </div>
+            <div class="work-body">
+              <h3>Expense notebook</h3>
+              <p>Category totals and a calm interface for daily spending.</p>
+              <div class="tag-row"><span class="tag">JS</span><span class="tag">Data</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+</section>
+<section class="view player-page" data-view="music" id="view-music">
+<div class="music-ether" id="musicEtherRoot" aria-hidden="true"></div>
+
+    <div class="page-head container">
+      <span class="eyebrow">03 — Music</span>
+      <h1>Listen <span class="grad-text">closely</span></h1>
+      <p>Three original demo tracks, a floating player, and scrolling lyrics. The full NetEase search and playlist experience lives in the local build.</p>
+    </div>
+
+    <div class="container music-search-wrap">
+      <div class="ne-search music-search">
+        <span class="music-search-label">Search NetEase</span>
+        <input type="text" id="neQuery" placeholder="Search songs or artists…" autocomplete="off">
+        <button id="neBtn" type="button">Search</button>
+      </div>
+    </div>
+
+    <div class="container player-stage-wrap">
+      <div class="player-shell" id="playerShell">
+        <div class="player-left">
+          <div class="disc-wrap">
+            <div class="disc" id="disc">
+              <img class="disc-img" id="discCover" src="images/demo-first-light.jpg" alt="Album cover">
+            </div>
+          </div>
+
+          <canvas class="viz" id="viz" aria-hidden="true"></canvas>
+
+          <span class="np-label"><span class="dot"></span> Now playing</span>
+          <h2 class="np-title" id="npTitle">No track selected</h2>
+          <p class="np-artist" id="npArtist">Choose a demo track below</p>
+
+          <div class="progress-row">
+            <span id="curTime">0:00</span>
+            <div class="seek" id="seek" role="slider" tabindex="0" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="seek-track">
+                <div class="seek-fill" id="seekFill"><span class="seek-knob"></span></div>
+              </div>
+            </div>
+            <span id="durTime">--:--</span>
+          </div>
+
+          <div class="controls">
+            <button class="ctrl" id="shuffleBtn" aria-label="Shuffle" aria-pressed="false" title="Shuffle"></button>
+            <button class="ctrl" id="prevBtn" aria-label="Previous track" title="Previous track"></button>
+            <button class="ctrl play" id="playBtn" aria-label="Play" title="Play / pause (Space)"></button>
+            <button class="ctrl" id="nextBtn" aria-label="Next track" title="Next track"></button>
+            <button class="ctrl" id="repeatBtn" aria-label="Repeat: all" title="Repeat mode"></button>
+          </div>
+
+          <div class="volume-row">
+            <span aria-hidden="true">🔈</span>
+            <input type="range" class="vol" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+            <span id="volText">80%</span>
+          </div>
+        </div>
+
+        <div class="lyrics-stage" id="lyricsStage">
+          <div class="lyrics-head">
+            <span class="eyebrow">Lyrics</span>
+            <span class="lyrics-head-note">scroll · click a line to seek</span>
+          </div>
+          <div class="lyrics" id="lyrics" aria-label="Scrolling lyrics"></div>
+        </div>
+      </div>
+
+      <p class="player-tip">
+        Shortcuts: <kbd>Space</kbd> play / pause, <kbd>←</kbd> <kbd>→</kbd> seek 5 seconds.
+        Demo tracks are included; the full NetEase service runs in the local build.
+      </p>
+    </div>
+
+    <div class="login-modal" id="neLoginModal" hidden>
+      <div class="login-box" role="dialog" aria-modal="true" aria-label="Sign in to NetEase">
+        <button type="button" class="login-close" id="neLoginClose" aria-label="Close">✕</button>
+        <h3>Sign in to NetEase</h3>
+        <p class="login-sub">Scan the QR code with the NetEase Cloud Music app</p>
+        <div class="qr-wrap" id="neQr"></div>
+        <p class="qr-status" id="neQrStatus">Generating QR code…</p>
+        <p class="login-tip">Login details stay on this local service and are only used to play more tracks.</p>
+      </div>
+    </div>
+
+  <div class="track-drawer" id="trackDrawer" aria-label="Music library" aria-hidden="true">
+    <div class="track-drawer-head">
+      <div>
+        <span class="eyebrow">Library</span>
+        <h2>Choose music</h2>
+      </div>
+      <button type="button" class="track-drawer-close" id="trackDrawerClose" aria-label="Close music library">✕</button>
+    </div>
+
+    <div class="track-drawer-body">
+      <div class="pl-tabs" role="tablist" aria-label="Player panels">
+        <button class="pl-tab active" data-tab="playlist" role="tab" aria-selected="true">Queue</button>
+        <button class="pl-tab" data-tab="netease" role="tab" aria-selected="false">NetEase</button>
+        <span class="pl-count" id="plCount">0 tracks</span>
+      </div>
+
+      <div class="pl-panel" id="panel-playlist" role="tabpanel">
+        <div class="playlist" id="playlist" aria-label="Play queue"></div>
+      </div>
+
+      <div class="pl-panel" id="panel-netease" role="tabpanel" hidden>
+        <div class="ne-account" id="neAccount">
+          <button type="button" class="ne-login" id="neLoginBtn">Sign in to NetEase</button>
+          <div class="ne-user" id="neUser" hidden>
+            <img class="ne-avatar" id="neAvatar" alt="">
+            <span class="ne-name" id="neName"></span>
+            <button type="button" class="ne-logout" id="neLogout">Sign out</button>
+          </div>
+        </div>
+
+        <div class="ne-library" id="neLibrary" hidden>
+          <div class="ne-library-head">
+            <span class="ne-library-label">My playlists</span>
+            <button type="button" class="ne-library-refresh" id="neLibraryRefresh">Refresh</button>
+          </div>
+          <div class="ne-playlist-swap" id="nePlaylistSwapRoot"></div>
+          <p class="ne-playlist-hint">Click a card to switch playlists</p>
+        </div>
+
+        <div class="ne-viewbar">
+          <span class="ne-view-label">View</span>
+          <div class="ne-viewtoggle" id="neViewToggle" role="group" aria-label="Track display">
+            <button type="button" data-view="list" class="active">List</button>
+            <button type="button" data-view="carousel">Carousel</button>
+          </div>
+        </div>
+
+        <div class="ne-results" id="neResults">
+          <p class="ne-hint">Sign in to load your playlists, or search for a song.<br>A local service is required.</p>
+        </div>
+        <div class="ne-animated-list" id="neAnimatedListRoot" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="track-drawer-handle" id="trackDrawerHandle" aria-label="Open music library" aria-expanded="false">
+    <span>Library</span>
+  </button>
+  <div class="track-drawer-hotzone" id="trackDrawerHotzone" aria-hidden="true"></div>
+
+  <div class="ne-carousel carousel-dock" id="neCarousel" hidden>
+    <div class="carousel-dock-head">
+      <span>Track carousel</span>
+      <span>Click a cover to play</span>
+      <button type="button" class="carousel-dock-close" id="carouselDockClose">Collapse</button>
+    </div>
+    <div id="neCarouselRoot"></div>
+  </div>
+
+  
+</section>
+<section class="view" data-view="game" id="view-game">
+<div class="page-head container">
+    <span class="eyebrow">04 — Play</span>
+    <h1>Nailong <span class="grad-text">memory</span></h1>
+    <p>A memory game made from 10 abstract Nailong stickers. Flip two matching cards to clear the board.</p>
+  </div>
+
+  <section class="container">
+    <div class="game-shell">
+      <div class="game-top">
+        <div class="game-stats">
+          <div class="gstat"><b id="gMoves">0</b><span>Moves</span></div>
+          <div class="gstat"><b id="gTime">0:00</b><span>Time</span></div>
+          <div class="gstat"><b id="gBest">--</b><span>Best</span></div>
+        </div>
+        <div class="game-tools">
+          <div class="seg" id="gDiff" role="group" aria-label="Difficulty">
+            <button type="button" data-diff="easy">6 pairs</button>
+            <button type="button" data-diff="normal" class="active">8 pairs</button>
+            <button type="button" data-diff="hard">10 pairs</button>
+          </div>
+          <button type="button" class="btn btn-ghost" id="gRestart">Restart</button>
+          <button type="button" class="icon-btn" id="gSound" aria-label="Sound effects" aria-pressed="true" title="Sound effects">🔊</button>
+        </div>
+      </div>
+
+      <div class="game-board" id="gameBoard" aria-label="Memory game board"></div>
+
+      <div class="game-foot">
+        <span class="game-hint" id="gHint">Flip the first card to start the timer</span>
+        <span class="game-credit">Images from the Nailong sticker collection.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="win-overlay" id="winOverlay" hidden>
+    <canvas class="win-confetti" id="winConfetti" aria-hidden="true"></canvas>
+    <div class="win-card" role="dialog" aria-modal="true" aria-label="Level complete">
+      <div class="win-emoji" id="winEmoji">🎉</div>
+      <h2>All pairs found!</h2>
+      <p class="win-stats" id="winStats"></p>
+      <div class="win-stars" id="winStars"></div>
+      <div class="win-actions">
+        <button type="button" class="btn btn-primary" id="winAgain">Play again</button>
+        <button type="button" class="btn btn-ghost" id="winClose">Back to the site</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+<section class="view" data-view="tools" id="view-tools">
+<div class="page-head container">
+    <span class="eyebrow">05 — Tools</span>
+    <h1>Small, useful <span class="grad-text">tools</span></h1>
+    <p>Two quiet utilities for focused work: a Pomodoro timer and a local to-do list. Everything stays in your browser.</p>
+  </div>
+
+  <section class="container tools-section">
+    <div class="tools-grid">
+      <article class="tool-card pomodoro-card" aria-labelledby="pomodoroTitle">
+        <div class="tool-head">
+          <div>
+            <span class="eyebrow">Focus timer</span>
+            <h2 id="pomodoroTitle">Pomodoro</h2>
+          </div>
+          <span class="tool-badge" id="pomoState">Focus</span>
+        </div>
+
+        <div class="pomo-modes" role="group" aria-label="Timer length">
+          <button type="button" class="active" data-pomo-mode="focus" data-minutes="25">Focus · 25</button>
+          <button type="button" data-pomo-mode="short" data-minutes="5">Short · 5</button>
+          <button type="button" data-pomo-mode="long" data-minutes="15">Long · 15</button>
+        </div>
+
+        <div class="pomo-ring-wrap">
+          <svg class="pomo-ring" viewbox="0 0 240 240" aria-hidden="true">
+            <circle class="pomo-ring-track" cx="120" cy="120" r="104"></circle>
+            <circle class="pomo-ring-fill" id="pomoRing" cx="120" cy="120" r="104"></circle>
+          </svg>
+          <div class="pomo-readout">
+            <strong id="pomoTime" aria-live="polite">25:00</strong>
+            <span id="pomoCaption">Ready to focus</span>
+          </div>
+        </div>
+
+        <div class="pomo-actions">
+          <button type="button" class="btn btn-primary" id="pomoStart">Start</button>
+          <button type="button" class="btn btn-ghost" id="pomoReset">Reset</button>
+        </div>
+        <p class="tool-foot" id="pomoCount">0 focus sessions completed</p>
+      </article>
+
+      <article class="tool-card todo-card" aria-labelledby="todoTitle">
+        <div class="tool-head">
+          <div>
+            <span class="eyebrow">Local list</span>
+            <h2 id="todoTitle">To-do</h2>
+          </div>
+          <span class="tool-badge"><span id="todoCount">0</span> left</span>
+        </div>
+
+        <form class="todo-form" id="todoForm">
+          <label class="sr-only" for="todoInput">New task</label>
+          <input type="text" id="todoInput" placeholder="What needs doing?" autocomplete="off" maxlength="120">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="active" data-todo-filter="all">All</button>
+          <button type="button" data-todo-filter="active">Active</button>
+          <button type="button" data-todo-filter="done">Done</button>
+        </div>
+
+        <ul class="todo-list" id="todoList"></ul>
+        <div class="todo-empty" id="todoEmpty">Nothing here yet. Add your first task above.</div>
+
+        <div class="todo-foot">
+          <span id="todoSummary">0 tasks</span>
+          <button type="button" class="todo-clear" id="todoClear">Clear done</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</section>
+<section class="view" data-view="contact" id="view-contact">
+<div class="page-head container">
+      <span class="eyebrow">06 — Contact</span>
+      <h1>Let's <span class="grad-text">talk</span></h1>
+      <p>Have a project, an idea, or just want to say hello? Send a note — I usually reply within a day or two.</p>
+    </div>
+
+    <section style="padding-top: 20px;">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <h2 class="section-title" style="font-size: 1.3rem;">Direct contact</h2>
+          <p class="section-desc" style="margin-top: 8px;">Use the copy button for a one-click copy.</p>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-ico">✉️</div>
+              <div class="meta">
+                <b>Email</b>
+                <span>X20250063@stu.hibiuh.edu.cn</span>
+              </div>
+              <button class="copy-btn" data-copy="X20250063@stu.hibiuh.edu.cn">Copy</button>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-ico">🎓</div>
+              <div class="meta">
+                <b>School</b>
+                <span>Hainan Bielefeld University of Applied Sciences (BIUH)</span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-ico">📍</div>
+              <div class="meta">
+                <b>Location</b>
+                <span>Hainan, China</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" data-delay="1">
+          <form class="form-card" id="contactForm" novalidate>
+            <h2 class="section-title" style="font-size: 1.3rem; margin-bottom: 6px;">Send a message</h2>
+            <p class="section-desc" style="margin-bottom: 22px;">Fields marked * are required.</p>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Your name *</label>
+                <input type="text" id="name" name="name" placeholder="What should I call you?" autocomplete="name">
+                <div class="err"></div>
+              </div>
+              <div class="field">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email">
+                <div class="err"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What is this about? (optional)">
+              <div class="err"></div>
+            </div>
+
+            <div class="field">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me a little about your idea or project…"></textarea>
+              <div class="err"></div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" style="width: 100%;">Send message</button>
+            <div class="form-ok" id="formOk"></div>
+            <p class="section-desc" style="font-size: 0.78rem; margin: 14px 0 0;">
+              Note: this is a front-end demo. Messages are saved in your browser only and are not sent anywhere.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+</section>
+  </main>
+
+<audio id="audio" preload="auto"></audio>
+
+
+  <div class="mini" id="miniBar" role="region" aria-label="Mini music player">
+    <a class="mini-main" href="#music" aria-label="Open the full player">
+      <img class="mini-cover" id="miniCover" src="images/demo-first-light.jpg" alt="">
+      <span class="mini-meta">
+        <span class="mini-title" id="miniTitle">No track selected</span>
+        <span class="mini-artist" id="miniArtist">Demo Sessions</span>
+      </span>
+    </a>
+    <div class="mini-controls">
+      <button class="mini-btn" id="miniRepeat" aria-label="Repeat mode" title="Repeat mode"></button>
+      <button class="mini-btn" id="miniPrev" aria-label="Previous track"></button>
+      <button class="mini-btn play" id="miniPlay" aria-label="Play"></button>
+      <button class="mini-btn" id="miniNext" aria-label="Next track"></button>
+      <button class="mini-btn" id="miniVol" aria-label="Volume"></button>
+      <button class="mini-close" id="miniClose" aria-label="Close player">✕</button>
+    </div>
+    <div class="mini-progress" id="miniSeek" role="slider" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="miniFill"></i></div>
+    <div class="mini-volume" id="miniVolume">
+      <div class="mini-vol-top">
+        <span>Volume</span>
+        <button class="mini-mute" id="miniMute" aria-label="Mute">Mute</button>
+      </div>
+      <input type="range" id="miniVolRange" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+    </div>
+  </div>
+
+<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="modal-box">
+    <div class="modal-thumb">
+      <img src="" alt="">
+      <button class="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <h3></h3>
+      <p></p>
+      <div class="tag-row"></div>
+    </div>
+  </div>
+</div>
+
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Jinghang Zhang — built with care.</span>
+      <span>
+        <a href="#home">Home</a> ·
+        <a href="#portfolio">Work</a> ·
+        <a href="#music">Music</a> ·
+        <a href="#game">Play</a> ·
+        <a href="#tools">Tools</a> ·
+        <a href="#contact">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/netease.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/lithos.js"></script>
+  <script src="js/particle-text.js" defer></script>
+  <script src="js/flex-carousel.js" defer></script>
+  <script src="js/liquid-ether.js" defer></script>
+  <script src="js/music-islands.js" defer></script>
+  <script src="js/liquid-glass.js" defer></script>
+  <script src="js/music-float.js" defer></script>
+  <script src="js/tools.js" defer></script>
+  <script src="js/unicorn-bg.js" defer></script>
+  <script src="js/lanyard.js" defer></script>
+</body>
+</html>
