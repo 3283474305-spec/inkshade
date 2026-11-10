@@ -12,6 +12,7 @@ Live site: **https://inkshade.icu**
 - Three original demo tracks with a floating player, queue and scrolling lyrics
 - Pomodoro focus timer and local to-do list
 - Nailong memory game with 6, 8 or 10 pairs
+- Path Maze arcade game with recursive DFS maze generation
 - Dark, responsive, glass-inspired interface
 
 ## Stack

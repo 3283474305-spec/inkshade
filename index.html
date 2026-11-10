@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/unicorn-bg.css">
   <link rel="stylesheet" href="css/lanyard.css">
   <link rel="stylesheet" href="css/hero-profile.css">
+  <link rel="stylesheet" href="css/maze.css">
   <noscript><style>.reveal { opacity: 1; transform: none; } .view { display: block !important; }</style></noscript>
 </head>
 <body data-page="home">
@@ -550,6 +551,67 @@
     </div>
   </section>
 
+  <section class="container maze-section" id="maze">
+    <div class="maze-heading">
+      <div>
+        <span class="eyebrow">Arcade · 02</span>
+        <h2>Path <span class="grad-text">maze</span></h2>
+        <p>Every board is generated fresh with a recursive DFS backtracker. Find the one path from the orange dot to the green exit.</p>
+      </div>
+      <div class="maze-note">
+        <span>Algorithm</span>
+        <strong>DFS · recursive backtracker</strong>
+        <small>Perfect maze · one path between any two cells</small>
+      </div>
+    </div>
+
+    <div class="maze-shell">
+      <div class="maze-top">
+        <div class="maze-stats">
+          <div class="mstat"><b id="mazeTime">0:00</b><span>Time</span></div>
+          <div class="mstat"><b id="mazeMoves">0</b><span>Moves</span></div>
+          <div class="mstat"><b id="mazeBest">--</b><span>Best</span></div>
+        </div>
+        <div class="maze-tools">
+          <label class="maze-select">
+            <span>Size</span>
+            <select id="mazeSize">
+              <option value="11">Small · 11×11</option>
+              <option value="15" selected>Medium · 15×15</option>
+              <option value="21">Large · 21×21</option>
+            </select>
+          </label>
+          <button type="button" class="btn btn-primary" id="mazeNew">New maze</button>
+        </div>
+      </div>
+
+      <div class="maze-canvas-wrap">
+        <canvas id="mazeCanvas" aria-label="Generated maze. Move the orange dot to the green exit."></canvas>
+        <div class="maze-win" id="mazeWin" hidden>
+          <div class="maze-win-card" role="dialog" aria-modal="true" aria-label="Maze solved">
+            <span class="eyebrow">Solved</span>
+            <h3>Path found.</h3>
+            <p id="mazeWinStats"></p>
+            <div class="maze-win-actions">
+              <button type="button" class="btn btn-primary" id="mazeAgain">New maze</button>
+              <button type="button" class="btn btn-ghost" id="mazeDismiss">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maze-foot">
+        <p class="maze-hint" id="mazeHint">Arrow keys / WASD · click an adjacent cell · or use the pad</p>
+        <div class="maze-dpad" role="group" aria-label="Maze movement">
+          <button type="button" data-move="up" aria-label="Move up">↑</button>
+          <button type="button" data-move="left" aria-label="Move left">←</button>
+          <button type="button" data-move="down" aria-label="Move down">↓</button>
+          <button type="button" data-move="right" aria-label="Move right">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="win-overlay" id="winOverlay" hidden>
     <canvas class="win-confetti" id="winConfetti" aria-hidden="true"></canvas>
     <div class="win-card" role="dialog" aria-modal="true" aria-label="Level complete">
@@ -798,5 +860,6 @@
   <script src="js/tools.js" defer></script>
   <script src="js/unicorn-bg.js" defer></script>
   <script src="js/lanyard.js" defer></script>
+  <script src="js/maze.js" defer></script>
 </body>
 </html>
