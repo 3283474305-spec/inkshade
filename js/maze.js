@@ -1,26 +1,45 @@
 /* ============================================================
-   Path maze — recursive DFS backtracker + canvas play
+   Save Dou Nai — six recursive-DFS mazes
    ============================================================ */
 (function () {
   "use strict";
 
   const canvas = document.getElementById("mazeCanvas");
   if (!canvas) return;
-
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
+  const levelEl = document.getElementById("mazeLevel");
   const timeEl = document.getElementById("mazeTime");
   const movesEl = document.getElementById("mazeMoves");
-  const bestEl = document.getElementById("mazeBest");
-  const sizeEl = document.getElementById("mazeSize");
-  const newBtn = document.getElementById("mazeNew");
   const hintEl = document.getElementById("mazeHint");
+  const progressEl = document.getElementById("mazeProgress");
   const winEl = document.getElementById("mazeWin");
+  const winEyebrow = document.getElementById("mazeWinEyebrow");
+  const winTitle = document.getElementById("mazeWinTitle");
   const winStats = document.getElementById("mazeWinStats");
-  const againBtn = document.getElementById("mazeAgain");
-  const dismissBtn = document.getElementById("mazeDismiss");
+  const nextBtn = document.getElementById("mazeNext");
+  const newBtn = document.getElementById("mazeNew");
   const moveButtons = Array.from(document.querySelectorAll("[data-move]"));
+
+  const LEVELS = [
+    { size: 11, name: "Blob", image: "images/maze/player-1.png" },
+    { size: 13, name: "Worm", image: "images/maze/player-2.png" },
+    { size: 15, name: "Pup", image: "images/maze/player-3.png" },
+    { size: 17, name: "Monk", image: "images/maze/player-4.png" },
+    { size: 19, name: "Nerd", image: "images/maze/player-5.png" },
+    { size: 21, name: "Angel", image: "images/maze/player-6.png" },
+  ];
+
+  const playerImages = LEVELS.map((level) => {
+    const image = new Image();
+    image.decoding = "async";
+    image.src = level.image;
+    return image;
+  });
+  const douNai = new Image();
+  douNai.decoding = "async";
+  douNai.src = "images/maze/dou-nai.png";
 
   const PAD = 14;
   const DIRS = [
@@ -30,7 +49,8 @@
     [-1, 0, "w", "e"],
   ];
 
-  let n = Number(sizeEl?.value) || 15;
+  let levelIndex = 0;
+  let n = LEVELS[0].size;
   let cells = [];
   let player = { x: 0, y: 0 };
   let goal = { x: n - 1, y: n - 1 };
@@ -46,7 +66,9 @@
   let side = 0;
   let dpr = 1;
   let raf = 0;
-  let pulse = 0;
+  let escaping = false;
+  let escapeAt = 0;
+  let corneredHint = false;
 
   const shuffle = (list) => {
     const out = list.slice();
@@ -57,24 +79,21 @@
     return out;
   };
 
-  /* Recursive DFS (backtracker). Every cell is visited exactly once. */
+  /* Recursive DFS backtracker: visit every cell once. */
   function carve(x, y) {
     cells[y][x].visited = true;
-    const directions = shuffle(DIRS);
-
-    for (const [dx, dy, wall, opposite] of directions) {
+    for (const [dx, dy, wall, opposite] of shuffle(DIRS)) {
       const nx = x + dx;
       const ny = y + dy;
       if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
       if (cells[ny][nx].visited) continue;
-
       cells[y][x][wall] = false;
       cells[ny][nx][opposite] = false;
       carve(nx, ny);
     }
   }
 
-  function generate(size) {
+  function buildMaze(size) {
     n = size;
     cells = Array.from({ length: n }, () =>
       Array.from({ length: n }, () => ({
@@ -92,34 +111,46 @@
     moves = 0;
     started = false;
     finished = false;
+    escaping = false;
+    escapeAt = 0;
+    corneredHint = false;
     elapsed = 0;
     startedAt = 0;
     clearInterval(timer);
     timer = 0;
     if (timeEl) timeEl.textContent = "0:00";
     if (movesEl) movesEl.textContent = "0";
-    if (hintEl) hintEl.textContent = "Arrow keys / WASD · click an adjacent cell · or use the pad";
     hideWin();
-    renderBest();
+    updateHud();
     resize();
     draw();
+  }
+
+  function updateHud() {
+    if (levelEl) levelEl.textContent = `${levelIndex + 1} / ${LEVELS.length}`;
+    if (progressEl) {
+      Array.from(progressEl.children).forEach((dot, index) => {
+        dot.classList.toggle("done", index < levelIndex);
+        dot.classList.toggle("active", index === levelIndex);
+      });
+    }
+    if (hintEl) {
+      hintEl.textContent =
+        levelIndex === LEVELS.length - 1
+          ? "Final maze · reach Dou Nai at the exit"
+          : `Level ${levelIndex + 1} · ${LEVELS[levelIndex].name} · Dou Nai is waiting at the exit`;
+    }
+  }
+
+  function startLevel(index) {
+    levelIndex = Math.max(0, Math.min(LEVELS.length - 1, index));
+    buildMaze(LEVELS[levelIndex].size);
   }
 
   function fmt(seconds) {
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
     return `${m}:${String(s).padStart(2, "0")}`;
-  }
-
-  function bestKey() {
-    return `maze-best-${n}`;
-  }
-
-  function renderBest() {
-    if (!bestEl) return;
-    const raw = localStorage.getItem(bestKey());
-    const value = Number(raw);
-    bestEl.textContent = raw && value > 0 ? fmt(value) : "--";
   }
 
   function startTimer() {
@@ -167,9 +198,7 @@
     ctx.strokeStyle = "rgba(255, 255, 255, 0.19)";
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
-    ctx.lineJoin = "round";
     ctx.beginPath();
-
     for (let y = 0; y < n; y++) {
       for (let x = 0; x < n; x++) {
         const cell = cells[y][x];
@@ -208,63 +237,107 @@
       ctx.fillRect(
         offset + point.x * cellSize + 2,
         offset + point.y * cellSize + 2,
-        cellSize - 4,
-        cellSize - 4
+        Math.max(1, cellSize - 4),
+        Math.max(1, cellSize - 4)
       );
     }
   }
 
-  function drawGoal(now) {
-    const p = center(goal.x, goal.y);
-    const t = Math.sin(now / 360) * 0.5 + 0.5;
-    const r = cellSize * 0.24 + t * cellSize * 0.035;
-
+  function drawSprite(image, x, y, maxW, maxH, alpha = 1) {
+    if (!image || !image.complete || !image.naturalWidth) return false;
+    const scale = Math.min(maxW / image.naturalWidth, maxH / image.naturalHeight);
+    const w = image.naturalWidth * scale;
+    const h = image.naturalHeight * scale;
     ctx.save();
-    ctx.shadowColor = "rgba(74, 222, 128, 0.8)";
-    ctx.shadowBlur = 18 + t * 10;
-    ctx.fillStyle = "rgba(74, 222, 128, 0.94)";
+    ctx.globalAlpha = alpha;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.55)";
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 3;
+    ctx.drawImage(image, x - w / 2, y - h / 2, w, h);
+    ctx.restore();
+    return true;
+  }
+
+  function drawDouNai(now) {
+    const p = center(goal.x, goal.y);
+    let x = p.x;
+    let y = p.y + Math.sin(now / 500) * 1.6;
+    let alpha = 1;
+
+    if (escaping && levelIndex < LEVELS.length - 1) {
+      const t = Math.min(1, (now - escapeAt) / 620);
+      const eased = 1 - Math.pow(1 - t, 3);
+      x += eased * cellSize * 2.8;
+      y -= eased * cellSize * 1.1;
+      alpha = 1 - t;
+    }
+
+    if (alpha <= 0) return;
+
+    // A soft halo so a pale character stays visible on dark ground.
+    ctx.save();
+    ctx.globalAlpha = alpha * 0.7;
+    const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, cellSize * 0.8);
+    glow.addColorStop(0, "rgba(255, 220, 140, 0.18)");
+    glow.addColorStop(1, "rgba(255, 220, 140, 0)");
+    ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.strokeStyle = "rgba(74, 222, 128, 0.35)";
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, r + 4 + t * 2, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.fillStyle = "rgba(4, 20, 9, 0.85)";
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, Math.max(1.5, r * 0.25), 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, cellSize * 0.8, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
+
+    const drawn = drawSprite(
+      douNai,
+      x,
+      y,
+      cellSize * 0.84,
+      cellSize * 1.05,
+      alpha
+    );
+
+    if (!drawn) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = "#f6d77a";
+      ctx.beginPath();
+      ctx.arc(x, y, cellSize * 0.24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
   }
 
   function drawPlayer() {
     const p = center(player.x, player.y);
-    const r = Math.max(3.5, cellSize * 0.24);
+    const image = playerImages[levelIndex];
+    const drawn = drawSprite(image, p.x, p.y, cellSize * 0.78, cellSize * 0.78);
+
+    if (!drawn) {
+      const r = Math.max(3.5, cellSize * 0.24);
+      ctx.save();
+      ctx.shadowColor = "rgba(232, 112, 42, 0.8)";
+      ctx.shadowBlur = 16;
+      ctx.fillStyle = "#e8702a";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
     ctx.save();
-    ctx.shadowColor = "rgba(232, 112, 42, 0.8)";
-    ctx.shadowBlur = 16;
-    ctx.fillStyle = "#e8702a";
+    ctx.strokeStyle = "rgba(232, 112, 42, 0.7)";
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-    ctx.beginPath();
-    ctx.arc(p.x - r * 0.22, p.y - r * 0.22, Math.max(1, r * 0.22), 0, Math.PI * 2);
-    ctx.fill();
+    ctx.arc(p.x, p.y, cellSize * 0.36, 0, Math.PI * 2);
+    ctx.stroke();
     ctx.restore();
   }
 
   function draw(now = performance.now()) {
     if (!side || !cellSize) return;
-    pulse = now;
     ctx.clearRect(0, 0, side, side);
     ctx.fillStyle = "#070708";
     ctx.fillRect(0, 0, side, side);
 
-    // quiet interior grid
     ctx.strokeStyle = "rgba(255, 255, 255, 0.025)";
     ctx.lineWidth = 1;
     for (let i = 1; i < n; i++) {
@@ -281,7 +354,7 @@
 
     drawTrail();
     drawWalls();
-    drawGoal(now);
+    drawDouNai(now);
     drawPlayer();
   }
 
@@ -306,23 +379,47 @@
     return false;
   }
 
-  function checkWin() {
-    if (player.x !== goal.x || player.y !== goal.y) return;
+  function finishLevel() {
     finished = true;
     stopTimer();
-    clearInterval(timer);
-    if (movesEl) movesEl.textContent = String(moves);
-    const previous = Number(localStorage.getItem(bestKey())) || 0;
-    if (!previous || elapsed < previous) {
-      localStorage.setItem(bestKey(), String(elapsed));
+    draw();
+    const final = levelIndex === LEVELS.length - 1;
+
+    if (winEyebrow) winEyebrow.textContent = final ? "Rescued" : "Level complete";
+    if (winTitle) {
+      winTitle.textContent = final
+        ? "You saved Dou Nai."
+        : `She slipped away to level ${levelIndex + 2}.`;
     }
-    renderBest();
-    if (hintEl) hintEl.textContent = "Path found. Generate another maze.";
     if (winStats) {
-      winStats.textContent = `${fmt(elapsed)} · ${moves} moves · ${n} × ${n} maze`;
+      winStats.textContent = final
+        ? `${fmt(elapsed)} · ${moves} moves · all six mazes cleared`
+        : `${fmt(elapsed)} · ${moves} moves · level ${levelIndex + 1} clear`;
+    }
+    if (nextBtn) nextBtn.textContent = final ? "Play again" : `Enter level ${levelIndex + 2}`;
+    if (hintEl) {
+      hintEl.textContent = final
+        ? "Dou Nai is safe. Start again for a new set of mazes."
+        : "Dou Nai has already run ahead — follow her.";
     }
     if (winEl) winEl.hidden = false;
-    draw();
+  }
+
+  function checkEscape() {
+    if (levelIndex === LEVELS.length - 1) {
+      if (!corneredHint && Math.abs(player.x - goal.x) + Math.abs(player.y - goal.y) <= 2) {
+        corneredHint = true;
+        if (hintEl) hintEl.textContent = "Dou Nai is cornered — reach her!";
+      }
+      return;
+    }
+    if (escaping) return;
+    if (Math.abs(player.x - goal.x) + Math.abs(player.y - goal.y) <= 2) {
+      escaping = true;
+      escapeAt = performance.now();
+      if (hintEl) hintEl.textContent = `Dou Nai ran to level ${levelIndex + 2}! Follow her.`;
+      wake();
+    }
   }
 
   function move(dx, dy) {
@@ -334,7 +431,8 @@
     moves += 1;
     if (movesEl) movesEl.textContent = String(moves);
     draw();
-    checkWin();
+    checkEscape();
+    if (player.x === goal.x && player.y === goal.y) finishLevel();
     return true;
   }
 
@@ -358,7 +456,7 @@
   document.addEventListener("keydown", (event) => {
     if (!gameIsActive()) return;
     const target = event.target;
-    if (target && (target.tagName === "INPUT" || target.tagName === "SELECT" || target.tagName === "TEXTAREA")) return;
+    if (target && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) return;
     if (moveByKey(event.key)) event.preventDefault();
   });
 
@@ -380,15 +478,17 @@
     if (x < 0 || y < 0 || x >= n || y >= n) return;
     const dx = x - player.x;
     const dy = y - player.y;
-    if (Math.abs(dx) + Math.abs(dy) === 1) {
-      move(dx, dy);
-    }
+    if (Math.abs(dx) + Math.abs(dy) === 1) move(dx, dy);
   });
 
-  newBtn?.addEventListener("click", () => generate(Number(sizeEl?.value) || 15));
-  sizeEl?.addEventListener("change", () => generate(Number(sizeEl.value) || 15));
-  againBtn?.addEventListener("click", () => generate(Number(sizeEl?.value) || 15));
-  dismissBtn?.addEventListener("click", hideWin);
+  newBtn?.addEventListener("click", () => startLevel(0));
+  nextBtn?.addEventListener("click", () => {
+    if (levelIndex < LEVELS.length - 1) startLevel(levelIndex + 1);
+    else startLevel(0);
+  });
+
+  douNai.addEventListener("load", () => draw());
+  playerImages.forEach((image) => image.addEventListener("load", () => draw()));
 
   document.addEventListener("routechange", (event) => {
     if (event.detail === "game") {
@@ -414,7 +514,7 @@
     }
   });
 
-  generate(n);
+  startLevel(0);
   requestAnimationFrame(() => {
     resize();
     draw();

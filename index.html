@@ -555,53 +555,47 @@
     <div class="maze-heading">
       <div>
         <span class="eyebrow">Arcade · 02</span>
-        <h2>Path <span class="grad-text">maze</span></h2>
-        <p>Every board is generated fresh with a recursive DFS backtracker. Find the one path from the orange dot to the green exit.</p>
+        <h2>Save <span class="grad-text">Dou Nai</span></h2>
+        <p>Six mazes. Six characters. Dou Nai waits at every exit — get close and she runs to the next level. Catch her in the final maze.</p>
       </div>
       <div class="maze-note">
-        <span>Algorithm</span>
-        <strong>DFS · recursive backtracker</strong>
-        <small>Perfect maze · one path between any two cells</small>
+        <span>Run structure</span>
+        <strong>6 levels · recursive DFS</strong>
+        <small>Each level is a perfect maze with one path between any two cells.</small>
       </div>
     </div>
 
     <div class="maze-shell">
       <div class="maze-top">
         <div class="maze-stats">
+          <div class="mstat"><b id="mazeLevel">1 / 6</b><span>Level</span></div>
           <div class="mstat"><b id="mazeTime">0:00</b><span>Time</span></div>
           <div class="mstat"><b id="mazeMoves">0</b><span>Moves</span></div>
-          <div class="mstat"><b id="mazeBest">--</b><span>Best</span></div>
         </div>
         <div class="maze-tools">
-          <label class="maze-select">
-            <span>Size</span>
-            <select id="mazeSize">
-              <option value="11">Small · 11×11</option>
-              <option value="15" selected>Medium · 15×15</option>
-              <option value="21">Large · 21×21</option>
-            </select>
-          </label>
-          <button type="button" class="btn btn-primary" id="mazeNew">New maze</button>
+          <div class="maze-progress" id="mazeProgress" aria-label="Level progress">
+            <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <button type="button" class="btn btn-primary" id="mazeNew">New game</button>
         </div>
       </div>
 
       <div class="maze-canvas-wrap">
-        <canvas id="mazeCanvas" aria-label="Generated maze. Move the orange dot to the green exit."></canvas>
+        <canvas id="mazeCanvas" aria-label="Maze. Use WASD or arrow keys to reach Dou Nai at the exit."></canvas>
         <div class="maze-win" id="mazeWin" hidden>
-          <div class="maze-win-card" role="dialog" aria-modal="true" aria-label="Maze solved">
-            <span class="eyebrow">Solved</span>
-            <h3>Path found.</h3>
+          <div class="maze-win-card" role="dialog" aria-modal="true" aria-label="Level complete">
+            <span class="eyebrow" id="mazeWinEyebrow">Level complete</span>
+            <h3 id="mazeWinTitle">She slipped away.</h3>
             <p id="mazeWinStats"></p>
             <div class="maze-win-actions">
-              <button type="button" class="btn btn-primary" id="mazeAgain">New maze</button>
-              <button type="button" class="btn btn-ghost" id="mazeDismiss">Close</button>
+              <button type="button" class="btn btn-primary" id="mazeNext">Next level</button>
             </div>
           </div>
         </div>
       </div>
 
       <div class="maze-foot">
-        <p class="maze-hint" id="mazeHint">Arrow keys / WASD · click an adjacent cell · or use the pad</p>
+        <p class="maze-hint" id="mazeHint">WASD / arrow keys · click an adjacent cell · or use the pad</p>
         <div class="maze-dpad" role="group" aria-label="Maze movement">
           <button type="button" data-move="up" aria-label="Move up">↑</button>
           <button type="button" data-move="left" aria-label="Move left">←</button>
