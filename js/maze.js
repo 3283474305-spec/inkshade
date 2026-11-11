@@ -148,7 +148,7 @@
     try {
       laughEl.pause();
       laughEl.currentTime = 0;
-      laughEl.volume = 0.85;
+      laughEl.volume = 0.3;
       const played = laughEl.play();
       if (played && played.catch) played.catch(() => {});
       laughTimer = setTimeout(() => {
