@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Private player · Jinghang Zhang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/player.css">
+  <link rel="stylesheet" href="css/lithos.css">
+  <link rel="stylesheet" href="css/music-float.css">
+  <link rel="stylesheet" href="css/music-embed.css">
+</head>
+<body data-page="music" class="embed-page">
+<section class="view player-page active" data-view="music" id="view-music">
+<div class="music-ether" id="musicEtherRoot" aria-hidden="true"></div>
+
+    <div class="page-head container">
+      <span class="eyebrow">03 — Music</span>
+      <h1>Listen <span class="grad-text">closely</span></h1>
+      <p>Three original demo tracks, a floating player, and scrolling lyrics. The full NetEase search and playlist experience lives in the local build.</p>
+    </div>
+
+    <div class="container music-tabs" role="tablist" aria-label="Music source">
+      <button type="button" class="music-tab active" data-music-tab="demo" role="tab" aria-selected="true">Demo player</button>
+      <button type="button" class="music-tab" data-music-tab="private" role="tab" aria-selected="false">My NetEase <span>own account</span></button>
+    </div>
+
+    <div class="container music-search-wrap">
+      <div class="ne-search music-search">
+        <span class="music-search-label">Search NetEase</span>
+        <input type="text" id="neQuery" placeholder="Search songs or artists…" autocomplete="off">
+        <button id="neBtn" type="button">Search</button>
+      </div>
+    </div>
+
+    <div class="container player-stage-wrap">
+      <div class="player-shell" id="playerShell">
+        <div class="player-left">
+          <div class="disc-wrap">
+            <div class="disc" id="disc">
+              <img class="disc-img" id="discCover" src="images/demo-first-light.jpg" alt="Album cover">
+            </div>
+          </div>
+
+          <canvas class="viz" id="viz" aria-hidden="true"></canvas>
+        </div>
+
+        <div class="lyrics-stage" id="lyricsStage">
+          <div class="lyrics-head">
+            <span class="eyebrow">Lyrics</span>
+            <span class="lyrics-head-note">scroll · click a line to seek</span>
+          </div>
+          <div class="lyrics" id="lyrics" aria-label="Scrolling lyrics"></div>
+        </div>
+      </div>
+
+      <p class="player-tip">
+        Shortcuts: <kbd>Space</kbd> play / pause, <kbd>←</kbd> <kbd>→</kbd> seek 5 seconds.
+        Demo tracks are included; the full NetEase service runs in the local build.
+      </p>
+    </div>
+
+    <div class="player-dock" id="playerDock">
+      <div class="dock-meta">
+        <span class="np-label"><span class="dot"></span> Now playing</span>
+        <h2 class="np-title" id="npTitle">No track selected</h2>
+        <p class="np-artist" id="npArtist">Choose a demo track below</p>
+      </div>
+
+      <div class="dock-progress">
+        <div class="progress-row">
+          <span id="curTime">0:00</span>
+          <div class="seek" id="seek" role="slider" tabindex="0" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="seek-track">
+              <div class="seek-fill" id="seekFill"><span class="seek-knob"></span></div>
+            </div>
+          </div>
+          <span id="durTime">--:--</span>
+        </div>
+      </div>
+
+      <div class="dock-actions">
+        <div class="controls">
+          <button class="ctrl" id="shuffleBtn" aria-label="Shuffle" aria-pressed="false" title="Shuffle"></button>
+          <button class="ctrl" id="prevBtn" aria-label="Previous track" title="Previous track"></button>
+          <button class="ctrl play" id="playBtn" aria-label="Play" title="Play / pause (Space)"></button>
+          <button class="ctrl" id="nextBtn" aria-label="Next track" title="Next track"></button>
+          <button class="ctrl" id="repeatBtn" aria-label="Repeat: all" title="Repeat mode"></button>
+        </div>
+
+        <div class="volume-row">
+          <span aria-hidden="true">🔈</span>
+          <input type="range" class="vol" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+          <span id="volText">80%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container private-embed" id="privateEmbed" hidden>
+      <div class="private-embed-head">
+        <div>
+          <span class="eyebrow">Private edition</span>
+          <h2>Your NetEase account.</h2>
+        </div>
+        <span class="private-embed-status">Tunnel required</span>
+      </div>
+      <iframe id="privateFrame" data-src="https://music.inkshade.icu/embed.html" title="Private NetEase player" loading="lazy" allow="autoplay; fullscreen"></iframe>
+      <p class="private-embed-note">
+        This pulls the private player from the local tunnel. Each visitor signs in with their own
+        NetEase account; nothing is shared. Start the tunnel first, or the frame will stay offline.
+        <a href="https://music.inkshade.icu/embed.html" target="_blank" rel="noopener">Open in a new tab ↗</a>
+      </p>
+    </div>
+
+    <button type="button" class="private-exit" id="privateExit" hidden>Exit player</button>
+
+    <div class="login-modal" id="neLoginModal" hidden>
+      <div class="login-box" role="dialog" aria-modal="true" aria-label="Sign in to NetEase">
+        <button type="button" class="login-close" id="neLoginClose" aria-label="Close">✕</button>
+        <h3>Sign in to NetEase</h3>
+        <p class="login-sub">Scan the QR code with the NetEase Cloud Music app</p>
+        <div class="qr-wrap" id="neQr"></div>
+        <p class="qr-status" id="neQrStatus">Generating QR code…</p>
+        <p class="login-tip">Login details stay on this local service and are only used to play more tracks.</p>
+      </div>
+    </div>
+
+  <div class="track-drawer" id="trackDrawer" aria-label="Music library" aria-hidden="true">
+    <div class="track-drawer-head">
+      <div>
+        <span class="eyebrow">Library</span>
+        <h2>Choose music</h2>
+      </div>
+      <button type="button" class="track-drawer-close" id="trackDrawerClose" aria-label="Close music library">✕</button>
+    </div>
+
+    <div class="track-drawer-body">
+      <div class="pl-tabs" role="tablist" aria-label="Player panels">
+        <button class="pl-tab active" data-tab="playlist" role="tab" aria-selected="true">Queue</button>
+        <button class="pl-tab" data-tab="netease" role="tab" aria-selected="false">NetEase</button>
+        <span class="pl-count" id="plCount">0 tracks</span>
+      </div>
+
+      <div class="pl-panel" id="panel-playlist" role="tabpanel">
+        <div class="playlist" id="playlist" aria-label="Play queue"></div>
+      </div>
+
+      <div class="pl-panel" id="panel-netease" role="tabpanel" hidden>
+        <div class="ne-account" id="neAccount">
+          <button type="button" class="ne-login" id="neLoginBtn">Sign in to NetEase</button>
+          <div class="ne-user" id="neUser" hidden>
+            <img class="ne-avatar" id="neAvatar" alt="">
+            <span class="ne-name" id="neName"></span>
+            <button type="button" class="ne-logout" id="neLogout">Sign out</button>
+          </div>
+        </div>
+
+        <div class="ne-library" id="neLibrary" hidden>
+          <div class="ne-library-head">
+            <span class="ne-library-label">My playlists</span>
+            <button type="button" class="ne-library-refresh" id="neLibraryRefresh">Refresh</button>
+          </div>
+          <div class="ne-playlist-swap" id="nePlaylistSwapRoot"></div>
+          <p class="ne-playlist-hint">Click a card to switch playlists</p>
+        </div>
+
+        <div class="ne-viewbar">
+          <span class="ne-view-label">View</span>
+          <div class="ne-viewtoggle" id="neViewToggle" role="group" aria-label="Track display">
+            <button type="button" data-view="list" class="active">List</button>
+            <button type="button" data-view="carousel">Carousel</button>
+          </div>
+        </div>
+
+        <div class="ne-results" id="neResults">
+          <p class="ne-hint">Sign in to load your playlists, or search for a song.<br>A local service is required.</p>
+        </div>
+        <div class="ne-animated-list" id="neAnimatedListRoot" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="track-drawer-handle" id="trackDrawerHandle" aria-label="Open music library" aria-expanded="false">
+    <span>Library</span>
+  </button>
+  <div class="track-drawer-hotzone" id="trackDrawerHotzone" aria-hidden="true"></div>
+
+  <div class="ne-carousel carousel-dock" id="neCarousel" hidden>
+    <div class="carousel-dock-head">
+      <span>Track carousel</span>
+      <span>Click a cover to play</span>
+      <button type="button" class="carousel-dock-close" id="carouselDockClose">Collapse</button>
+    </div>
+    <div id="neCarouselRoot"></div>
+  </div>
+
+  
+</section>
+
+<audio id="audio" preload="auto"></audio>
+
+
+  
+<script src="js/player.js"></script>
+<script src="js/netease.js"></script>
+<script src="js/music-float.js"></script>
+<script>
+setTimeout(function () {
+  var tab = document.querySelector('.pl-tab[data-tab="netease"]');
+  var drawer = document.getElementById('trackDrawer');
+  if (tab) tab.click();
+  if (drawer) drawer.classList.add('open');
+  document.body.classList.add('drawer-open');
+}, 800);
+</script>
+</body>
+</html>

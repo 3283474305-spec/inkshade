@@ -205,7 +205,8 @@ body.music-private .to-top,
 body.music-private .page-head,
 body.music-private .music-tabs,
 body.music-private .private-embed-head,
-body.music-private .private-embed-note {
+body.music-private .private-embed-note,
+body.music-private .player-dock {
   display: none !important;
 }
 
@@ -255,4 +256,30 @@ body.music-private .private-embed iframe {
 
 .private-exit[hidden] {
   display: none;
+}
+
+/* Lightweight iframe page has no site header */
+body.embed-page .track-drawer {
+  top: 0;
+}
+
+body.embed-page #view-music {
+  min-height: 100dvh;
+}
+
+/* Lightweight private page: no site chrome, just the player */
+body.embed-page .bar,
+body.embed-page .footer,
+body.embed-page .mini,
+body.embed-page .to-top,
+body.embed-page .page-head,
+body.embed-page .music-tabs,
+body.embed-page .private-embed,
+body.embed-page .player-tip,
+body.embed-page .music-static-note {
+  display: none !important;
+}
+
+body.embed-page .music-search-wrap {
+  padding-top: 18px;
 }

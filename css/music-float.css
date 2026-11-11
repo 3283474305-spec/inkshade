@@ -690,3 +690,150 @@ body.music-static .player-tip {
   text-align: center;
 }
 
+
+/* ---------- Floating bottom player dock ---------- */
+#view-music {
+  padding-bottom: 150px;
+}
+
+.player-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 68;
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(300px, 1.8fr) auto;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 34px);
+  width: min(1180px, calc(100vw - 36px));
+  padding: 13px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 20px;
+  background: rgba(9, 9, 11, 0.78);
+  box-shadow:
+    0 30px 80px -28px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(26px) saturate(1.35);
+  backdrop-filter: blur(26px) saturate(1.35);
+  transform: translateX(-50%);
+}
+
+.dock-meta {
+  min-width: 0;
+}
+
+.dock-meta .np-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+  font-size: 8px;
+}
+
+.dock-meta .np-title {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dock-meta .np-artist {
+  margin: 3px 0 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dock-progress {
+  min-width: 0;
+}
+
+.dock-progress .progress-row {
+  width: 100%;
+  margin: 0;
+  padding: 6px 12px;
+}
+
+.dock-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.dock-actions .controls {
+  flex: none;
+  margin: 0;
+  padding: 7px 12px;
+}
+
+.dock-actions .controls .ctrl.play {
+  box-shadow:
+    0 8px 22px -10px rgba(232, 112, 42, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.dock-actions .volume-row {
+  width: 130px;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.dock-actions .volume-row .vol {
+  min-width: 48px;
+}
+
+@media (max-width: 960px) {
+  .player-dock {
+    grid-template-columns: minmax(150px, 0.8fr) minmax(240px, 1.4fr);
+    gap: 12px 20px;
+    padding: 12px 16px;
+  }
+
+  .dock-actions {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+
+  .dock-actions .volume-row {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  #view-music {
+    padding-bottom: 180px;
+  }
+
+  .player-dock {
+    bottom: 10px;
+    width: calc(100vw - 20px);
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+
+  .dock-meta {
+    text-align: center;
+  }
+
+  .dock-meta .np-label {
+    justify-content: center;
+  }
+
+  .dock-progress .progress-row {
+    padding: 4px 8px;
+  }
+
+  .dock-actions {
+    grid-column: auto;
+  }
+}
