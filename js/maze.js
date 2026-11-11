@@ -490,9 +490,20 @@
 
   document.addEventListener("keydown", (event) => {
     if (!gameIsActive()) return;
+    const mazePanel = document.querySelector('[data-game-panel="maze"]');
+    if (!mazePanel || mazePanel.hidden) return;
     const target = event.target;
     if (target && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) return;
-    if (moveByKey(event.key)) event.preventDefault();
+
+    const movementKeys = new Set([
+      "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+      "w", "W", "a", "A", "s", "S", "d", "D",
+    ]);
+    if (!movementKeys.has(event.key)) return;
+
+    // Stop arrow/WASD from scrolling the page even when a wall blocks the move.
+    event.preventDefault();
+    moveByKey(event.key);
   });
 
   moveButtons.forEach((button) => {
