@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jinghang Zhang — personal site, interfaces and small tools. BIUH, Hainan.">
   <title>Jinghang Zhang — Layers of code &amp; craft</title>
+  <script>if (new URLSearchParams(location.search).get("embed") === "1") document.documentElement.classList.add("embed-mode");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" media="print" onload="this.media='all'">
@@ -25,6 +26,7 @@
   <link rel="stylesheet" href="css/hero-profile.css">
   <link rel="stylesheet" href="css/maze.css">
   <link rel="stylesheet" href="css/game-tabs.css">
+  <link rel="stylesheet" href="css/music-embed.css">
   <noscript><style>.reveal { opacity: 1; transform: none; } .view { display: block !important; }</style></noscript>
 </head>
 <body data-page="home">
@@ -372,6 +374,11 @@
       <p>Three original demo tracks, a floating player, and scrolling lyrics. The full NetEase search and playlist experience lives in the local build.</p>
     </div>
 
+    <div class="container music-tabs" role="tablist" aria-label="Music source">
+      <button type="button" class="music-tab active" data-music-tab="demo" role="tab" aria-selected="true">Demo player</button>
+      <button type="button" class="music-tab" data-music-tab="private" role="tab" aria-selected="false">My NetEase <span>own account</span></button>
+    </div>
+
     <div class="container music-search-wrap">
       <div class="ne-search music-search">
         <span class="music-search-label">Search NetEase</span>
@@ -432,6 +439,22 @@
       <p class="player-tip">
         Shortcuts: <kbd>Space</kbd> play / pause, <kbd>←</kbd> <kbd>→</kbd> seek 5 seconds.
         Demo tracks are included; the full NetEase service runs in the local build.
+      </p>
+    </div>
+
+    <div class="container private-embed" id="privateEmbed" hidden>
+      <div class="private-embed-head">
+        <div>
+          <span class="eyebrow">Private edition</span>
+          <h2>Your NetEase account.</h2>
+        </div>
+        <span class="private-embed-status">Tunnel required</span>
+      </div>
+      <iframe id="privateFrame" data-src="https://music.inkshade.icu/?embed=1#music" title="Private NetEase player" loading="lazy" allow="autoplay; fullscreen"></iframe>
+      <p class="private-embed-note">
+        This pulls the private player from the local tunnel. Each visitor signs in with their own
+        NetEase account; nothing is shared. Start the tunnel first, or the frame will stay offline.
+        <a href="https://music.inkshade.icu/?embed=1#music" target="_blank" rel="noopener">Open in a new tab ↗</a>
       </p>
     </div>
 
@@ -725,6 +748,7 @@
           <p class="section-desc" style="margin-top: 8px;">Use the copy button for a one-click copy.</p>
 
           <div class="contact-list">
+            <!--email_off-->
             <div class="contact-item">
               <div class="contact-ico">✉️</div>
               <div class="meta">
@@ -733,6 +757,7 @@
               </div>
               <button class="copy-btn" data-copy="X20250063@stu.hibiuh.edu.cn">Copy</button>
             </div>
+            <!--/email_off-->
 
             <div class="contact-item">
               <div class="contact-ico">🎓</div>
@@ -871,5 +896,7 @@
   <script src="js/lanyard.js" defer></script>
   <script src="js/game-tabs.js" defer></script>
   <script src="js/maze.js" defer></script>
+  <script src="js/music-tabs.js" defer></script>
+  <script src="js/embed-mode.js" defer></script>
 </body>
 </html>
