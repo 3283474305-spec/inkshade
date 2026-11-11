@@ -12,7 +12,7 @@ Live site: **https://inkshade.icu**
 - Three original demo tracks with a floating player, queue and scrolling lyrics
 - Pomodoro focus timer and local to-do list
 - Nailong memory game with 6, 8 or 10 pairs
-- Save Dou Nai: a six-level rescue maze with recursive DFS generation and a different character on every level
+- Save Dou Nai: a three-level rescue maze with recursive DFS generation and a different character on every level
 - Dark, responsive, glass-inspired interface
 
 ## Stack

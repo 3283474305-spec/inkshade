@@ -321,7 +321,7 @@
   }
 }
 
-/* Six-level rescue progress */
+/* Three-level rescue progress */
 .maze-progress {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
 /* ============================================================
-   Save Dou Nai — six recursive-DFS mazes
+   Save Dou Nai — three recursive-DFS mazes
    ============================================================ */
 (function () {
   "use strict";
@@ -29,9 +29,6 @@
     { size: 11, name: "Blob", image: "images/maze/player-1.png" },
     { size: 13, name: "Worm", image: "images/maze/player-2.png" },
     { size: 15, name: "Pup", image: "images/maze/player-3.png" },
-    { size: 17, name: "Monk", image: "images/maze/player-4.png" },
-    { size: 19, name: "Nerd", image: "images/maze/player-5.png" },
-    { size: 21, name: "Angel", image: "images/maze/player-6.png" },
   ];
 
   const playerImages = LEVELS.map((level) => {
@@ -428,13 +425,13 @@
     }
     if (winStats) {
       winStats.textContent = final
-        ? `${fmt(elapsed)} · ${moves} moves · all six mazes cleared`
+        ? `${fmt(elapsed)} · ${moves} moves · all three mazes cleared`
         : `${fmt(elapsed)} · ${moves} moves · level ${levelIndex + 1} clear`;
     }
     if (nextBtn) nextBtn.textContent = final ? "Play again" : `Enter level ${levelIndex + 2}`;
     if (hintEl) {
       hintEl.textContent = final
-        ? "Dou Nai is safe. Start again for a new set of mazes."
+        ? "Dou Nai is safe. Start again for a new set of three mazes."
         : "Dou Nai has already run ahead — follow her.";
     }
     if (memeEl) memeEl.hidden = !final;
@@ -530,6 +527,16 @@
 
   document.addEventListener("routechange", (event) => {
     if (event.detail === "game") {
+      requestAnimationFrame(() => {
+        resize();
+        draw();
+        wake();
+      });
+    }
+  });
+
+  document.addEventListener("game:tab", (event) => {
+    if (event.detail === "maze") {
       requestAnimationFrame(() => {
         resize();
         draw();
