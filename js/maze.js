@@ -434,9 +434,8 @@
         ? "Dou Nai is safe. Start again for a new set of three mazes."
         : "Dou Nai has already run ahead — follow her.";
     }
+    stopLaugh();
     if (memeEl) memeEl.hidden = !final;
-    if (final) playLaugh();
-    else stopLaugh();
     if (winEl) winEl.hidden = false;
   }
 
@@ -531,6 +530,17 @@
   nextBtn?.addEventListener("click", () => {
     if (levelIndex < LEVELS.length - 1) startLevel(levelIndex + 1);
     else startLevel(0);
+  });
+
+  memeEl?.addEventListener("click", () => {
+    if (!memeEl.hidden) playLaugh();
+  });
+  memeEl?.addEventListener("keydown", (event) => {
+    if (memeEl.hidden) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      playLaugh();
+    }
   });
 
   douNai.addEventListener("load", () => draw());

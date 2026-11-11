@@ -381,3 +381,16 @@
 @media (prefers-reduced-motion: reduce) {
   .maze-win-meme { animation: none; }
 }
+
+.maze-win-meme {
+  cursor: pointer;
+}
+
+.maze-win-meme:focus-visible {
+  outline: 2px solid #e8702a;
+  outline-offset: 3px;
+}
+
+.maze-win-meme:hover {
+  filter: brightness(1.06);
+}
