@@ -584,6 +584,7 @@
         <canvas id="mazeCanvas" aria-label="Maze. Use WASD or arrow keys to reach Dou Nai at the exit."></canvas>
         <div class="maze-win" id="mazeWin" hidden>
           <div class="maze-win-card" role="dialog" aria-modal="true" aria-label="Level complete">
+            <img class="maze-win-meme" id="mazeWinMeme" src="images/maze/dou-nai-win.gif" alt="Dou Nai laughing" hidden>
             <span class="eyebrow" id="mazeWinEyebrow">Level complete</span>
             <h3 id="mazeWinTitle">She slipped away.</h3>
             <p id="mazeWinStats"></p>
@@ -605,6 +606,8 @@
       </div>
     </div>
   </section>
+
+  <audio id="mazeLaugh" src="audio/dou-nai-laugh.mp3" preload="none"></audio>
 
   <div class="win-overlay" id="winOverlay" hidden>
     <canvas class="win-confetti" id="winConfetti" aria-hidden="true"></canvas>

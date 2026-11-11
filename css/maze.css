@@ -354,3 +354,30 @@
   display: inline-block;
   margin-bottom: 2px;
 }
+
+/* Final rescue sticker */
+.maze-win-meme {
+  display: block;
+  width: 92px;
+  height: 122px;
+  margin: 0 auto 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.85);
+  animation: mazeMeme 2.2s ease-in-out infinite;
+}
+
+.maze-win-meme[hidden] {
+  display: none;
+}
+
+@keyframes mazeMeme {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maze-win-meme { animation: none; }
+}

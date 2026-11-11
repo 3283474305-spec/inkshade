@@ -20,7 +20,10 @@
   const winStats = document.getElementById("mazeWinStats");
   const nextBtn = document.getElementById("mazeNext");
   const newBtn = document.getElementById("mazeNew");
+  const memeEl = document.getElementById("mazeWinMeme");
+  const laughEl = document.getElementById("mazeLaugh");
   const moveButtons = Array.from(document.querySelectorAll("[data-move]"));
+  let laughTimer = 0;
 
   const LEVELS = [
     { size: 11, name: "Blob", image: "images/maze/player-1.png" },
@@ -142,8 +145,40 @@
     }
   }
 
+  function playLaugh() {
+    if (!laughEl) return;
+    clearTimeout(laughTimer);
+    try {
+      laughEl.pause();
+      laughEl.currentTime = 0;
+      laughEl.volume = 0.85;
+      const played = laughEl.play();
+      if (played && played.catch) played.catch(() => {});
+      laughTimer = setTimeout(() => {
+        laughEl.pause();
+        laughEl.currentTime = 0;
+      }, 3000);
+    } catch (error) {
+      /* Audio is optional. */
+    }
+  }
+
+  function stopLaugh() {
+    clearTimeout(laughTimer);
+    laughTimer = 0;
+    if (!laughEl) return;
+    try {
+      laughEl.pause();
+      laughEl.currentTime = 0;
+    } catch (error) {
+      /* ignore */
+    }
+  }
+
   function startLevel(index) {
     levelIndex = Math.max(0, Math.min(LEVELS.length - 1, index));
+    stopLaugh();
+    if (memeEl) memeEl.hidden = true;
     buildMaze(LEVELS[levelIndex].size);
   }
 
@@ -402,6 +437,9 @@
         ? "Dou Nai is safe. Start again for a new set of mazes."
         : "Dou Nai has already run ahead — follow her.";
     }
+    if (memeEl) memeEl.hidden = !final;
+    if (final) playLaugh();
+    else stopLaugh();
     if (winEl) winEl.hidden = false;
   }
 
