@@ -338,3 +338,57 @@ body.embed-page .player-left {
 body.embed-page .music-ether {
   opacity: 0.12 !important;
 }
+
+/* Lyrics readability over the reactive background */
+#view-music .lyrics-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 52% 50%, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.3) 54%, transparent 78%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.2) 12%, rgba(0, 0, 0, 0.34) 100%);
+}
+
+#view-music .lyrics {
+  position: relative;
+  z-index: 1;
+}
+
+#view-music .lyric-line {
+  color: rgba(255, 255, 255, 0.56);
+  opacity: 0.88;
+  filter: blur(0.25px);
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+#view-music .lyric-line.passed {
+  color: rgba(255, 255, 255, 0.43);
+  opacity: 0.6;
+  filter: blur(0.45px);
+}
+
+#view-music .lyric-line.active {
+  color: #fff;
+  opacity: 1;
+  filter: none;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.5),
+    0 0 26px rgba(255, 255, 255, 0.32),
+    0 0 58px rgba(232, 112, 42, 0.3);
+}
+
+#sonicFrame {
+  opacity: 0.45;
+}
+
+#view-music .lyrics-stage::before {
+  background:
+    radial-gradient(ellipse at 52% 50%, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.46) 56%, rgba(0, 0, 0, 0.12) 82%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.32) 12%, rgba(0, 0, 0, 0.5) 100%);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+}

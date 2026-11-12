@@ -23,7 +23,9 @@
     });
 
     if (privateMode) {
-      if (!frame.getAttribute("src")) frame.src = frame.dataset.src;
+      const url = new URL(frame.dataset.src, location.href);
+      url.searchParams.set("v", Date.now());
+      frame.src = url.toString();
     } else if (frame.getAttribute("src")) {
       frame.src = "about:blank";
     }
