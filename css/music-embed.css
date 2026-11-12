@@ -283,3 +283,24 @@ body.embed-page .music-static-note {
 body.embed-page .music-search-wrap {
   padding-top: 18px;
 }
+
+/* Keep the track carousel open above the floating player dock */
+#view-music .carousel-dock:not([hidden]) {
+  bottom: 138px;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+#view-music:has(#neCarousel:not([hidden])) {
+  padding-bottom: 360px;
+}
+
+@media (max-width: 640px) {
+  #view-music .carousel-dock:not([hidden]) {
+    bottom: 188px;
+  }
+
+  #view-music:has(#neCarousel:not([hidden])) {
+    padding-bottom: 390px;
+  }
+}
