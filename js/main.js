@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    个人网站 · 共享脚本
    各页面按需使用：脚本会检测元素是否存在，不存在就跳过。
    ============================================================ */
@@ -382,12 +382,12 @@
 
   /* ============ 13. 单页路由 ============ */
   const VIEWS = {
-    home: "Jinghang Zhang — Layers of code & craft",
-    portfolio: "Work — Jinghang Zhang",
-    music: "Music — Jinghang Zhang",
-    game: "Play — Jinghang Zhang",
-    tools: "Tools — Jinghang Zhang",
-    contact: "Contact — Jinghang Zhang",
+    home: "Jinhang Zhang — Layers of code & craft",
+    portfolio: "Work — Jinhang Zhang",
+    music: "Music — Jinhang Zhang",
+    game: "Play — Jinhang Zhang",
+    tools: "Tools — Jinhang Zhang",
+    contact: "Contact — Jinhang Zhang",
   };
   const VALID_VIEWS = Object.keys(VIEWS);
   const viewEls = $$(".view");
@@ -513,3 +513,4 @@
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
+

@@ -1,6 +1,6 @@
-# inkshade.icu — Layers of code & craft
+﻿# inkshade.icu — Layers of code & craft
 
-Personal website of **Jinghang Zhang**, a student at Hainan Bielefeld University of Applied Sciences (BIUH).
+Personal website of **Jinhang Zhang**, a student at Hainan Bielefeld University of Applied Sciences (BIUH).
 
 Live site: **https://inkshade.icu**
 
@@ -64,3 +64,4 @@ Do not point the existing `inkshade.icu` DNS at GitHub Pages unless you intend t
 
 - The Unicorn Studio project includes its own “Unicorn” watermark; it is part of the scene content and cannot be removed from the front-end code.
 - The site is intentionally image-light: the lanyard card uses text and 3D materials, not a portrait photo.
+

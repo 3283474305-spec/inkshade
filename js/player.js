@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    音乐播放器（单页应用版）
    - 完整播放器和底部迷你条共用同一个 <audio>，切换页面不会中断
    - 播放列表 + 歌词面板
@@ -92,7 +92,7 @@
   const DEMO_TRACKS = [
     {
       title: "First Light",
-      artist: "Jinghang Zhang",
+      artist: "Jinhang Zhang",
       src: "audio/first-light.wav",
       cover: "images/demo-first-light.jpg",
       duration: 20,
@@ -107,7 +107,7 @@
     },
     {
       title: "Night Drive",
-      artist: "Jinghang Zhang",
+      artist: "Jinhang Zhang",
       src: "audio/night-drive.wav",
       cover: "images/demo-night-drive.jpg",
       duration: 20,
@@ -122,7 +122,7 @@
     },
     {
       title: "Paper Sky",
-      artist: "Jinghang Zhang",
+      artist: "Jinhang Zhang",
       src: "audio/paper-sky.wav",
       cover: "images/demo-paper-sky.jpg",
       duration: 20,
@@ -1058,3 +1058,4 @@
     });
   }
 })();
+
