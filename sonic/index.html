@@ -95,21 +95,9 @@
       window.addEventListener("load", function () {
         setTimeout(function () {
           if (!window.wallpaperPropertyListener) return;
+          // Use the base 3747222633 defaults; only hide the wallpaper's own
+          // media controller so the site player remains the single UI.
           window.wallpaperPropertyListener.applyUserProperties({
-            theme: { value: "ocean-deep" },
-            audioIntensity: { value: 1.5 },
-            responseRange: { value: 2 },
-            gridSize: { value: 160 },
-            cameraAngleX: { value: 125 },
-            cameraAngleY: { value: 25 },
-            cameraDistance: { value: 85 },
-            peakColorEnabled: { value: true },
-            peakColorIntensity: { value: 0.4 },
-            pulseEnabled: { value: true },
-            pulseSensitivity: { value: 0.4 },
-            idleWaveEnabled: { value: true },
-            meteorEnabled: { value: true },
-            meteorSensitivity: { value: 0.1 },
             showPlayerController: { value: false },
             showAlbumCover: { value: false }
           });
