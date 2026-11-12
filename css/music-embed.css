@@ -304,3 +304,37 @@ body.embed-page .music-search-wrap {
     padding-bottom: 390px;
   }
 }
+
+/* Audio-reactive sonic topography layer inside the private player */
+body.embed-page {
+  background: #050508;
+}
+
+#sonicFrame {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0.62;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+body.embed-page #view-music {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+body.embed-page .player-page,
+body.embed-page .player-shell,
+body.embed-page .lyrics-stage,
+body.embed-page .player-left {
+  background: transparent !important;
+}
+
+body.embed-page .music-ether {
+  opacity: 0.12 !important;
+}

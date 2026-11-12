@@ -849,6 +849,8 @@
     freqData = new Uint8Array(analyser.frequencyBinCount);
     src.connect(analyser);
     analyser.connect(audioCtx.destination);
+    window.__playerAnalyser = analyser;
+    window.__playerFreqData = freqData;
   }
 
   function accentColors() {

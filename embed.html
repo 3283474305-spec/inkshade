@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/music-embed.css">
 </head>
 <body data-page="music" class="embed-page">
+<iframe id="sonicFrame" src="sonic/index.html" title="Sonic topography" aria-hidden="true" tabindex="-1"></iframe>
 <section class="view player-page active" data-view="music" id="view-music">
 <div class="music-ether" id="musicEtherRoot" aria-hidden="true"></div>
 
@@ -212,6 +213,33 @@
 <script src="js/music-float.js"></script>
 <script src="js/music-islands.js"></script>
 <script src="js/flex-carousel.js"></script>
+<script>
+(function () {
+  var frame = document.getElementById('sonicFrame');
+  var audio = document.getElementById('audio');
+  if (!frame || !audio) return;
+  var last = 0;
+  function send(ts) {
+    requestAnimationFrame(send);
+    if (ts - last < 33) return;
+    last = ts;
+    var analyser = window.__playerAnalyser;
+    var freq = window.__playerFreqData;
+    if (!analyser || !freq || !frame.contentWindow) return;
+    analyser.getByteFrequencyData(freq);
+    var out = new Array(128);
+    if (audio.paused) {
+      out.fill(0);
+    } else {
+      for (var i = 0; i < 128; i++) {
+        out[i] = freq[Math.min(freq.length - 1, Math.floor(i * freq.length / 128))] || 0;
+      }
+    }
+    frame.contentWindow.postMessage({ type: 'sonic-audio', data: out }, '*');
+  }
+  requestAnimationFrame(send);
+})();
+</script>
 <script>
 setTimeout(function () {
   var tab = document.querySelector('.pl-tab[data-tab="netease"]');
