@@ -1,0 +1,88 @@
+/* Readability pass: body copy, secondary text, reduced motion. */
+body {
+  font-size: 15px;
+}
+
+.section-desc,
+.hero-intro p,
+.about-copy p,
+.work-card p,
+.contact-item .meta span,
+.player-tip,
+.private-embed-note {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  .contact-item .meta span {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-intro,
+  .hero-heading,
+  .np-title,
+  .np-artist,
+  .lanyard,
+  .lanyard * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.contact-item .email-address {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Raised reading sizes for the main copy. */
+.section-desc,
+.hero-intro p,
+.about-copy p,
+.work-card p,
+.contact-item .meta span,
+.player-tip,
+.private-embed-note {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.contact-item .meta span.email-address {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.music-search-label,
+.np-label,
+.lyrics-head-note {
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .section-desc,
+  .hero-intro p,
+  .about-copy p,
+  .work-card p,
+  .contact-item .meta span,
+  .player-tip,
+  .private-embed-note {
+    font-size: 15px;
+  }
+
+  .contact-item .meta span.email-address {
+    font-size: 12px;
+  }
+}

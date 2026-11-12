@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/music-islands.css">
   <link rel="stylesheet" href="css/flex-carousel.css">
   <link rel="stylesheet" href="css/music-embed.css">
+  <link rel="stylesheet" href="css/readability.css">
 </head>
 <body data-page="music" class="embed-page">
 <iframe id="sonicFrame" src="sonic/index.html?v=2" title="Sonic topography" aria-hidden="true" tabindex="-1"></iframe>
@@ -156,7 +157,7 @@
         <div class="ne-account" id="neAccount">
           <button type="button" class="ne-login" id="neLoginBtn">Sign in to NetEase</button>
           <div class="ne-user" id="neUser" hidden>
-            <img class="ne-avatar" id="neAvatar" alt="">
+            <img class="ne-avatar" id="neAvatar" src="images/avatar-placeholder.svg" alt="NetEase avatar">
             <span class="ne-name" id="neName"></span>
             <button type="button" class="ne-logout" id="neLogout">Sign out</button>
           </div>
@@ -242,6 +243,8 @@
 </script>
 <script>
 setTimeout(function () {
+  // Do not cover the phone player with a full-screen library on arrival.
+  if (window.innerWidth < 720) return;
   var tab = document.querySelector('.pl-tab[data-tab="netease"]');
   var drawer = document.getElementById('trackDrawer');
   if (tab) tab.click();

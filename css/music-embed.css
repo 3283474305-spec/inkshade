@@ -392,3 +392,80 @@ body.embed-page .music-ether {
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
+
+/* Compact phone player: readable search, smaller dock, more lyrics */
+@media (max-width: 640px) {
+  .music-search-wrap .ne-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .music-search-wrap .music-search-label {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .music-search-wrap #neQuery {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .player-dock {
+    padding: 7px 10px;
+    gap: 4px;
+  }
+
+  .dock-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .dock-meta .np-label,
+  .dock-meta .np-artist {
+    display: none;
+  }
+
+  .dock-meta .np-title {
+    font-size: 1.05rem;
+  }
+
+  .dock-progress .progress-row {
+    padding: 2px 8px;
+  }
+
+  .dock-actions .controls {
+    padding: 4px 6px;
+    gap: 4px;
+  }
+
+  .dock-actions .ctrl {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dock-actions .ctrl.play {
+    width: 48px;
+    height: 48px;
+  }
+
+  #view-music {
+    padding-bottom: 162px;
+  }
+}
+
+@media (max-width: 390px) {
+  .dock-actions .ctrl {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dock-actions .ctrl.play {
+    width: 46px;
+    height: 46px;
+  }
+}
